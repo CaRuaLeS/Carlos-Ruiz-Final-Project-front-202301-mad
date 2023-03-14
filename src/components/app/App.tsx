@@ -14,7 +14,7 @@ export const menuOptions: MenuOption[] = [
   { label: "Profile", path: "/profile", image: "./images/profile_icon.svg" },
 ];
 
-function App() {
+export function App() {
   return (
     <>
       <Header>
