@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { AppRouter } from "../app-router/app-router";
 import { Header } from "../header/header";
-import App from "./app";
+import { App } from "./app";
 
 jest.mock("../header/header");
 jest.mock("../app-router/app-router");
