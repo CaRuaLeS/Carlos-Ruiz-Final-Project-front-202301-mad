@@ -1,8 +1,8 @@
-import { UserStructure } from "../model/user";
+import { ServerType, UserStructure } from "../model/user";
 import { URL_MAZE_USERS } from "../variables";
 import { Repo } from "./user-repo-interface";
 
-export class UsersRepo implements Repo<UserStructure> {
+export class UsersRepo implements Repo<ServerType> {
   url: string;
   constructor() {
     this.url = URL_MAZE_USERS;
@@ -11,7 +11,7 @@ export class UsersRepo implements Repo<UserStructure> {
   async create(
     userInfo: Partial<UserStructure>,
     urlExtraPath: string
-  ): Promise<UserStructure> {
+  ): Promise<ServerType> {
     const url = this.url + "/" + urlExtraPath;
 
     const resp = await fetch(url, {
@@ -24,7 +24,7 @@ export class UsersRepo implements Repo<UserStructure> {
     if (!resp.ok)
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
 
-    const data = (await resp.json()) as UserStructure;
+    const data = await resp.json();
 
     return data;
   }
@@ -33,7 +33,7 @@ export class UsersRepo implements Repo<UserStructure> {
     userInfo: Partial<UserStructure>,
     urlExtraPath: string,
     token: string
-  ): Promise<UserStructure> {
+  ): Promise<ServerType> {
     const url = this.url + "/" + urlExtraPath;
 
     const resp = await fetch(url, {

@@ -7,6 +7,10 @@ export type UserStructure = {
   token?: string;
 };
 
+export type ServerType = {
+  results: UserStructure[];
+};
+
 export class User implements UserStructure {
   constructor(
     public id: string,
