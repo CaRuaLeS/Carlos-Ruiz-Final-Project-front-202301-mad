@@ -19,6 +19,7 @@ export const userSlice = createSlice({
       state.users = [...state.users, action.payload];
     },
     login(state, action: PayloadAction<UserStructure>) {
+      debugger;
       state.userLogged = action.payload;
     },
   },
