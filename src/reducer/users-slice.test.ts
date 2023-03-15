@@ -2,11 +2,13 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { UserStructure } from "../model/user";
 import { userReducer, State } from "./users-slice";
 
+const mockPasswd = "test";
+
 const mockUser = {
   id: "3",
   username: "foo",
   email: "foo",
-  password: "test",
+  password: mockPasswd,
 };
 const mockInitialState: State = {
   userLogged: {} as UserStructure,
