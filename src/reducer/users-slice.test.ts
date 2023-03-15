@@ -31,7 +31,7 @@ describe("Given the userSlice", () => {
         payload: mockUser,
       };
       const element = userReducer(mockInitialState, mockRegisterAction);
-      expect(element.users).toBe(mockUser);
+      expect(element.userLogged).toBe(mockUser);
     });
   });
 });
