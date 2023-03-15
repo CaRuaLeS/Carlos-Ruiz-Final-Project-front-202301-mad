@@ -11,7 +11,6 @@ import { useUsers } from "./use-users";
 describe("Given the useUsers hook", () => {
   let mockPayload: UserStructure;
   let mockRepo: UsersRepo;
-  let mockErrorRepo: UsersRepo;
 
   beforeEach(async () => {
     mockPayload = {
