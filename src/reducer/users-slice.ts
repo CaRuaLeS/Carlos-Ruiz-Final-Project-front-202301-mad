@@ -23,3 +23,7 @@ export const userSlice = createSlice({
     },
   },
 });
+
+export const { register, login } = userSlice.actions;
+
+export const userReducer = userSlice.reducer;
