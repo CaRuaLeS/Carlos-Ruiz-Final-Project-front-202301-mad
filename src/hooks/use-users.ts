@@ -12,7 +12,7 @@ export function useUsers(repo: UsersRepo) {
       const data = await repo.create(info, "register");
       dispatch(register(data.results[0]));
     } catch (error) {
-      console.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
@@ -21,7 +21,7 @@ export function useUsers(repo: UsersRepo) {
       const data = await repo.create(info, "login");
       dispatch(login(data.results[0]));
     } catch (error) {
-      console.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
