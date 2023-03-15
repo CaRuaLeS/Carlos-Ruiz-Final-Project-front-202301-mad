@@ -1,4 +1,3 @@
-import { UserStructure } from "../model/user";
 import { UsersRepo } from "./user-repo";
 
 describe("Given the users repo", () => {
