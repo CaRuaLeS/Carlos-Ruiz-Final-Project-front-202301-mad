@@ -2,10 +2,6 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { UserStructure } from "../model/user";
 import { userReducer, State } from "./users-slice";
 
-const mockUsers = [
-  { id: "1", username: "juan", email: "juan", password: "red" },
-  { id: "2", username: "pipo", email: "pipo", password: "asdf" },
-];
 const mockUser = {
   id: "3",
   username: "foo",
