@@ -1,0 +1,61 @@
+/* eslint-disable testing-library/no-render-in-setup */
+/* eslint-disable testing-library/no-unnecessary-act */
+import { render, screen, act, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event/";
+import { Provider } from "react-redux";
+import { useUsers } from "../../hooks/use-users";
+import { UsersRepo } from "../../services/user-repo";
+import { store } from "../../store/store";
+import { Register } from "./register";
+
+jest.mock("../../hooks/use-users");
+
+describe("Given the register function", () => {
+  beforeEach(async () => {
+    await act(async () => {
+      (useUsers as jest.Mock).mockReturnValue({
+        userRegister: jest.fn(),
+      });
+      render(
+        <Provider store={store}>
+          <Register></Register>
+        </Provider>
+      );
+    });
+  });
+
+  describe("when the component is rendered", () => {
+    test("then it should get the texbox elements in the document", () => {
+      const element = screen.getAllByRole("textbox");
+      expect(element[0]).toBeInTheDocument();
+      expect(element[1]).toBeInTheDocument();
+      expect(element[2]).toBeInTheDocument();
+    });
+  });
+
+  describe("when you get the submit button", () => {
+    test("then it should be called", async () => {
+      const button = screen.getByRole("button");
+      expect(button).toBeInTheDocument();
+    });
+    test("then it if you fire the button it should receive the inputs filed", async () => {
+      const mockRepo = {} as UsersRepo;
+
+      const element = screen.getAllByRole("textbox");
+      const button = screen.getByRole("button");
+
+      await userEvent.type(element[0], "user test");
+      await userEvent.type(element[1], "email test");
+      await userEvent.type(element[2], "pass test");
+
+      await fireEvent.click(button);
+
+      expect(button).toBeInTheDocument();
+      expect(useUsers(mockRepo).userRegister).toBeCalledWith({
+        username: "user test",
+        email: "email test",
+        password: "pass test",
+      });
+    });
+  });
+});

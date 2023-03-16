@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use-users";
 import { User } from "../../model/user";
@@ -18,8 +19,6 @@ export function Register() {
       email: (formUser.elements[1] as HTMLFormElement).value,
       password: (formUser.elements[2] as HTMLFormElement).value,
     };
-
-    console.log(registerForm);
     userRegister(registerForm);
   };
 
@@ -34,8 +33,8 @@ export function Register() {
         <input type="email" name="email" required />
       </label>
       <label>
-        email
-        <input type="password" name="password" required />
+        password
+        <input type="password" name="password" role="textbox" required />
       </label>
       <label>
         avatar
