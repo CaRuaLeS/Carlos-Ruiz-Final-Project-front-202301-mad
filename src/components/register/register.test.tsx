@@ -10,6 +10,8 @@ import { Register } from "./register";
 
 jest.mock("../../hooks/use-users");
 
+const mockPasswd = "pass test";
+
 describe("Given the register function", () => {
   beforeEach(async () => {
     await act(async () => {
@@ -54,7 +56,7 @@ describe("Given the register function", () => {
       expect(useUsers(mockRepo).userRegister).toBeCalledWith({
         username: "user test",
         email: "email test",
-        password: "pass test",
+        password: mockPasswd,
       });
     });
   });

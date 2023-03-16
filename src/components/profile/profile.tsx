@@ -6,14 +6,14 @@ export function Profile() {
   const [isInLogin, setIsInLogin] = useState(false);
 
   const handlerChange = (condition: boolean) => {
-    setIsInLogin((condition = !condition));
+    setIsInLogin(condition);
   };
 
   return (
     <>
       <h2>Profile</h2>
-      <button onClick={() => handlerChange(isInLogin)}>Register</button>
-      <button onClick={() => handlerChange(isInLogin)}>Login</button>
+      <button onClick={() => handlerChange(false)}>Register</button>
+      <button onClick={() => handlerChange(true)}>Login</button>
       {isInLogin ? <LogIn></LogIn> : <Register></Register>}
     </>
   );

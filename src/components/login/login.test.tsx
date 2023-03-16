@@ -10,6 +10,8 @@ import { LogIn } from "./login";
 
 jest.mock("../../hooks/use-users");
 
+const mockPasswd = "pass test";
+
 describe("Given the login function", () => {
   beforeEach(async () => {
     await act(async () => {
@@ -51,7 +53,7 @@ describe("Given the login function", () => {
       expect(button).toBeInTheDocument();
       expect(useUsers(mockRepo).userLogin).toBeCalledWith({
         email: "email test",
-        password: "pass test",
+        password: mockPasswd,
       });
     });
   });
