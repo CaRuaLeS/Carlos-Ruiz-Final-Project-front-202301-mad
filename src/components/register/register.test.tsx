@@ -26,8 +26,8 @@ describe("Given the register function", () => {
     });
   });
 
-  describe("when the component is rendered", () => {
-    test("then it should get the texbox elements in the document", () => {
+  describe("when the regsiter component is rendered", () => {
+    test("then it should get the texbox elements in the document(username, email, passwd)", () => {
       const element = screen.getAllByRole("textbox");
       expect(element[0]).toBeInTheDocument();
       expect(element[1]).toBeInTheDocument();
@@ -35,12 +35,12 @@ describe("Given the register function", () => {
     });
   });
 
-  describe("when you get the submit button", () => {
-    test("then it should be called", async () => {
+  describe("when you get the submit register button", () => {
+    test("then it should called the register button", async () => {
       const button = screen.getByRole("button");
       expect(button).toBeInTheDocument();
     });
-    test("then it if you fire the button it should receive the inputs filed", async () => {
+    test("then if you fire the button it should receive the inputs and  they have been called", async () => {
       const mockRepo = {} as UsersRepo;
 
       const element = screen.getAllByRole("textbox");

@@ -8,9 +8,9 @@ import { UsersRepo } from "../../services/user-repo";
 import { store } from "../../store/store";
 import { LogIn } from "./login";
 
-jest.mock("../../hooks/use-users");
-
 const mockPasswd = "pass test";
+
+jest.mock("../../hooks/use-users");
 
 describe("Given the login function", () => {
   beforeEach(async () => {
@@ -26,20 +26,20 @@ describe("Given the login function", () => {
     });
   });
 
-  describe("when the component is rendered", () => {
-    test("then it should get the texbox elements in the document", () => {
+  describe("when the login component is rendered", () => {
+    test("then it should get the texbox elements in the document(email, passwd)", () => {
       const element = screen.getAllByRole("textbox");
       expect(element[0]).toBeInTheDocument();
       expect(element[1]).toBeInTheDocument();
     });
   });
 
-  describe("when you get the submit button", () => {
-    test("then it should be called", async () => {
+  describe("when you get the submit login button", () => {
+    test("then it should called the login button", async () => {
       const button = screen.getByRole("button");
       expect(button).toBeInTheDocument();
     });
-    test("then it if you fire the button it should receive the inputs filed", async () => {
+    test("then if you fire the button it should receive the inputs filed", async () => {
       const mockRepo = {} as UsersRepo;
 
       const element = screen.getAllByRole("textbox");
