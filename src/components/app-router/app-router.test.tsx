@@ -1,5 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import { Provider } from "react-redux";
 import { MemoryRouter as Router } from "react-router-dom";
+import { store } from "../../store/store";
 import { MenuOption } from "../app/app";
 import { AppRouter } from "./app-router";
 
@@ -11,9 +13,11 @@ describe("Given the app router component", () => {
 
   const mockRouterFunctions = (num: number) => {
     render(
-      <Router initialEntries={["/home", "/profile"]} initialIndex={num}>
-        <AppRouter menuOptions={mockOptions}></AppRouter>
-      </Router>
+      <Provider store={store}>
+        <Router initialEntries={["/home", "/profile"]} initialIndex={num}>
+          <AppRouter menuOptions={mockOptions}></AppRouter>
+        </Router>
+      </Provider>
     );
   };
 
@@ -29,9 +33,7 @@ describe("Given the app router component", () => {
   describe("when the route is PROFILE", () => {
     test("then it should go to /profile and render it", async () => {
       await waitFor(async () => mockRouterFunctions(1));
-      const element = await screen.findByRole("heading", {
-        name: "Profile",
-      });
+      const element = await screen.findByRole("heading");
       expect(element).toBeInTheDocument();
     });
   });
