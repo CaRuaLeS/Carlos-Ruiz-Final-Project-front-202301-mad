@@ -53,11 +53,14 @@ describe("Given the register function", () => {
       await fireEvent.click(button);
 
       expect(button).toBeInTheDocument();
-      expect(useUsers(mockRepo).userRegister).toBeCalledWith({
-        username: "user test",
-        email: "email test",
-        password: mockPasswd,
-      });
+      expect(useUsers(mockRepo).userRegister).toBeCalledWith(
+        {
+          username: "user test",
+          email: "email test",
+          password: mockPasswd,
+        },
+        null
+      );
     });
   });
 });

@@ -19,7 +19,8 @@ export function Register() {
       email: (formUser.elements[1] as HTMLFormElement).value,
       password: (formUser.elements[2] as HTMLFormElement).value,
     };
-    userRegister(registerForm);
+    const avatar = (formUser.elements[3] as HTMLFormElement).files?.item(0);
+    userRegister(registerForm, avatar);
   };
 
   return (
