@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use-users";
 import { User } from "../../model/user";
@@ -13,8 +14,8 @@ export function LogIn() {
     const formUSer = event.currentTarget;
 
     const loginForm: Partial<User> = {
-      email: (formUSer[0] as HTMLFormElement).value,
-      password: (formUSer[1] as HTMLFormElement).value,
+      email: (formUSer.elements[0] as HTMLFormElement).value,
+      password: (formUSer.elements[1] as HTMLFormElement).value,
     };
 
     userLogin(loginForm);
@@ -28,7 +29,7 @@ export function LogIn() {
       </label>
       <label>
         password
-        <input type="password" name="password" required />
+        <input type="password" name="password" role="textbox" required />
       </label>
 
       <button type="submit">Log In</button>
