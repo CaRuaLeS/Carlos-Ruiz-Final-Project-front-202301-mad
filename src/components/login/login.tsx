@@ -31,7 +31,7 @@ export function LogIn() {
         <input type="password" name="password" required />
       </label>
 
-      <button type="submit">Register</button>
+      <button type="submit">Log In</button>
     </form>
   );
 }
