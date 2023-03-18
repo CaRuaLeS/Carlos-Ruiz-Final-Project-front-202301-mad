@@ -7,7 +7,7 @@ export type UserStructure = {
   token?: string;
 };
 
-export type ServerType = {
+export type ServerTypeUser = {
   results: UserStructure[];
 };
 

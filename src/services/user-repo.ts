@@ -1,8 +1,8 @@
-import { ServerType, UserStructure } from "../model/user";
+import { ServerTypeUser, UserStructure } from "../model/user";
 import { URL_MAZE_USERS } from "../variables";
 import { Repo } from "./user-repo-interface";
 
-export class UsersRepo implements Repo<ServerType> {
+export class UsersRepo implements Repo<ServerTypeUser> {
   url: string;
   constructor() {
     this.url = URL_MAZE_USERS;
@@ -11,7 +11,7 @@ export class UsersRepo implements Repo<ServerType> {
   async create(
     userInfo: Partial<UserStructure>,
     urlExtraPath: string
-  ): Promise<ServerType> {
+  ): Promise<ServerTypeUser> {
     const url = this.url + "/" + urlExtraPath;
 
     const resp = await fetch(url, {
@@ -33,7 +33,7 @@ export class UsersRepo implements Repo<ServerType> {
     userInfo: Partial<UserStructure>,
     urlExtraPath: string,
     token: string
-  ): Promise<ServerType> {
+  ): Promise<ServerTypeUser> {
     const url = this.url + "/" + urlExtraPath;
 
     const resp = await fetch(url, {
