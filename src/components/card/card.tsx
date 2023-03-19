@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
+import { EscapeRoomStructure } from "../../model/escaperoom";
 
-export function Card() {
+type RoomProps = {
+  room: Partial<EscapeRoomStructure>;
+};
+
+export function Card({ room }: RoomProps) {
   return (
     <li>
-      <Link to={`/details/`}></Link>
+      <Link to={`/details/${room.id}`}>
+        <p>{room.name}</p>
+      </Link>
     </li>
   );
 }
