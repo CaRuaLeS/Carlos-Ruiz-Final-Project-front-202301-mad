@@ -14,7 +14,8 @@ export function useEscapeRooms(repo: EscaperoomsRepo) {
   const escaperoomGetAll = async () => {
     try {
       const data = await repo.getAll();
-      dispatch(getAllEscaperooms(data.results[0]));
+      console.log(data);
+      dispatch(getAllEscaperooms(data.results));
     } catch (error) {
       console.error((error as Error).message);
     }
