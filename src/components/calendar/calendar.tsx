@@ -18,8 +18,6 @@ export function Calendar({ monthOffset }: Props) {
   );
   const firstWeekDayOfMonth = firstOfMonth.getDay();
   const lastWeekDayOfMonth = lastOfMonth.getDay();
-  console.log(firstWeekDayOfMonth);
-  console.log(lastWeekDayOfMonth);
   const offset = -firstWeekDayOfMonth;
   const rows = [];
   for (let i = 0; i < 6; i++) {

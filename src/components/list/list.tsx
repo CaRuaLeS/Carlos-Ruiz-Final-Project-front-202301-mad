@@ -11,7 +11,6 @@ export function List() {
 
   useEffect(() => {
     escaperoomGetAll();
-    console.log("object");
   }, []);
 
   return (
