@@ -1,8 +1,8 @@
 import { ServerTypeUser, UserStructure } from "../model/user";
 import { URL_MAZE_USERS } from "../variables";
-import { Repo } from "./user-repo-interface";
+import { RepoUser } from "./user-repo-interface";
 
-export class UsersRepo implements Repo<ServerTypeUser> {
+export class UsersRepo implements RepoUser<ServerTypeUser> {
   url: string;
   constructor() {
     this.url = URL_MAZE_USERS;
