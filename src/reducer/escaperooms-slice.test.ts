@@ -23,7 +23,7 @@ describe("Given the escaperoomSlice", () => {
         payload: mockEscapeRoom,
       };
       const element = escaperoomReducer(mockInitialState, mockgetAllAction);
-      expect(element.escapeRooms).toEqual([mockEscapeRoom]);
+      expect(element.escapeRooms).toEqual(mockEscapeRoom);
     });
   });
   describe("When the method GETBYTHEMEESCAPEROOMS is called", () => {
