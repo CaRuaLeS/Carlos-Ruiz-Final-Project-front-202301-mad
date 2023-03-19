@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { EscapeRoom, EscapeRoomStructure } from "../model/escaperoom";
+import { EscapeRoomStructure } from "../model/escaperoom";
 
-export type State = {
+export type EscaperoomState = {
   detailsRoom: EscapeRoomStructure;
   escapeRooms: EscapeRoomStructure[];
 };
-const initialState: State = {
+const initialState: EscaperoomState = {
   detailsRoom: {} as EscapeRoomStructure,
   escapeRooms: [],
 };
@@ -23,3 +23,8 @@ export const escaperoomSlice = createSlice({
     // Falta añadir si se selecciona 1 sola escaperoom
   },
 });
+
+export const { getAllEscaperooms, getByThemeEscaperooms } =
+  escaperoomSlice.actions;
+
+export const escaperoomReducer = escaperoomSlice.reducer;
