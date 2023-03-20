@@ -26,6 +26,24 @@ describe("Given the escaperoom repo", () => {
     });
   });
 
+  describe("when getById is called", () => {
+    test("then if all is OK it return the info", async () => {
+      const mockId = { id: "test" };
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue(mockId),
+      });
+
+      const info = await repo.getById("test");
+      expect(info).toEqual(mockId);
+    });
+    test("then if fetch resp is NO OK it throws error", async () => {
+      global.fetch = jest.fn().mockResolvedValue("Test error");
+      const info = repo.getById("test");
+      await expect(info).rejects.toThrow();
+    });
+  });
+
   describe("when we call the getByTheme function", () => {
     test("then fetch is OK it should return data", async () => {
       const mockValue = { theme: "test" };
