@@ -22,7 +22,6 @@ export function useUsers(repo: UsersRepo) {
   const userLogin = async (info: Partial<UserStructure>) => {
     try {
       const data = await repo.create(info, "login");
-      console.log(data);
 
       dispatch(login(data.results[0]));
     } catch (error) {

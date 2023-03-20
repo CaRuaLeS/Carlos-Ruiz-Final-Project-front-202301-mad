@@ -10,7 +10,7 @@ import { useUsers } from "./use-users";
 
 describe("Given the useUsers hook", () => {
   let mockPayload: UserStructure;
-  let mockRepo: UsersRepo;
+  let mockUsersRepo: UsersRepo;
 
   beforeEach(async () => {
     mockPayload = {
@@ -18,12 +18,12 @@ describe("Given the useUsers hook", () => {
       email: "test",
     } as unknown as UserStructure;
 
-    mockRepo = {
+    mockUsersRepo = {
       create: jest.fn(),
     } as unknown as UsersRepo;
 
-    const TestComponent = function () {
-      const { userRegister, userLogin } = useUsers(mockRepo);
+    const TestUserComponent = function () {
+      const { userRegister, userLogin } = useUsers(mockUsersRepo);
 
       return (
         <>
@@ -36,31 +36,31 @@ describe("Given the useUsers hook", () => {
     await act(async () =>
       render(
         <Provider store={store}>
-          <TestComponent></TestComponent>
+          <TestUserComponent></TestUserComponent>
         </Provider>
       )
     );
   });
 
-  describe("when the TestComponent is rendered", () => {
+  describe("when the TestUserComponent is rendered", () => {
     test("then the buttons should be in the document", async () => {
       const elements = await screen.findAllByRole("button");
       expect(elements[0]).toBeInTheDocument();
       expect(elements[1]).toBeInTheDocument();
     });
   });
-  describe("when the REGISTER button of TestComponent is called", () => {
+  describe("when the REGISTER button of TestUserComponent is called", () => {
     test("then the userRegister should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[0]));
-      expect(mockRepo.create).toHaveBeenCalled();
+      expect(mockUsersRepo.create).toHaveBeenCalled();
     });
   });
-  describe("when the LOGIN button of TestComponent is called", () => {
+  describe("when the LOGIN button of TestUserComponent is called", () => {
     test("then the userLogin should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[1]));
-      expect(mockRepo.create).toHaveBeenCalled();
+      expect(mockUsersRepo.create).toHaveBeenCalled();
     });
   });
 });
