@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EscapeRoomStructure } from "../model/escaperoom";
 import {
   getAllEscaperooms,
+  getByIdEscaperooms,
   getByThemeEscaperooms,
 } from "../reducer/escaperooms-slice";
 import { EscaperoomsRepo } from "../services/escaperoom-repo";
@@ -21,6 +22,15 @@ export function useEscapeRooms(repo: EscaperoomsRepo) {
     }
   }, [dispatch, repo]);
 
+  const escaperoomGetById = async (roomId: string) => {
+    try {
+      const data = await repo.getById(roomId);
+      dispatch(getByIdEscaperooms(data.results[0]));
+    } catch (error) {
+      console.error((error as Error).message);
+    }
+  };
+
   const escaperoomGetByTheme = async (theme: EscapeRoomStructure["theme"]) => {
     try {
       const data = await repo.getByTheme(theme);
@@ -33,6 +43,7 @@ export function useEscapeRooms(repo: EscaperoomsRepo) {
   return {
     escaperooms,
     escaperoomGetAll,
+    escaperoomGetById,
     escaperoomGetByTheme,
   };
 }
