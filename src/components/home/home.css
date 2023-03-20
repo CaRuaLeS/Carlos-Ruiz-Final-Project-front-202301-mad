@@ -1,0 +1,8 @@
+.home {
+  text-align: center;
+}
+
+.home__select {
+  width: 15rem;
+  margin: 10px;
+}
