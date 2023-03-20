@@ -26,13 +26,23 @@ describe("Given the escaperoomSlice", () => {
       expect(element.escapeRooms).toEqual(mockEscapeRoom);
     });
   });
+  describe("when we call the GETBYIDESCAPEROOMS method", () => {
+    test("then", () => {
+      const mockGetIdAction: PayloadAction<EscapeRoomStructure> = {
+        type: "escaperoom/getByIdEscaperooms",
+        payload: mockEscapeRoom,
+      };
+      const element = escaperoomReducer(mockInitialState, mockGetIdAction);
+      expect(element.detailsRoom).toEqual(mockEscapeRoom);
+    });
+  });
   describe("When the method GETBYTHEMEESCAPEROOMS is called", () => {
     test("then it should return in escapeRooms, the mock given", () => {
-      const mockgetAllAction: PayloadAction<EscapeRoomStructure> = {
+      const mockgetByThemeAction: PayloadAction<EscapeRoomStructure> = {
         type: "escaperoom/getByThemeEscaperooms",
         payload: mockEscapeRoom,
       };
-      const element = escaperoomReducer(mockInitialState, mockgetAllAction);
+      const element = escaperoomReducer(mockInitialState, mockgetByThemeAction);
       expect(element.escapeRooms).toEqual([mockEscapeRoom]);
     });
   });
