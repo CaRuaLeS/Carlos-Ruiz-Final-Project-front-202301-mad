@@ -11,6 +11,7 @@ import { Card } from "./card";
 const mockRoom = {
   id: "idTest",
   name: "name test",
+  images: ["1", "2"],
 } as unknown as EscapeRoomStructure;
 
 describe("Given the card component", () => {
