@@ -20,8 +20,8 @@ export const escaperoomSlice = createSlice({
     getByIdEscaperooms(state, action: PayloadAction<EscapeRoomStructure>) {
       state.detailsRoom = action.payload;
     },
-    getByThemeEscaperooms(state, action: PayloadAction<EscapeRoomStructure>) {
-      state.escapeRooms = [action.payload];
+    getByThemeEscaperooms(state, action: PayloadAction<EscapeRoomStructure[]>) {
+      state.escapeRooms = action.payload;
     },
     // Falta añadir si se selecciona 1 sola escaperoom
   },

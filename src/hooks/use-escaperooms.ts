@@ -34,7 +34,7 @@ export function useEscapeRooms(repo: EscaperoomsRepo) {
   const escaperoomGetByTheme = async (theme: EscapeRoomStructure["theme"]) => {
     try {
       const data = await repo.getByTheme(theme);
-      dispatch(getByThemeEscaperooms(data.results[0]));
+      dispatch(getByThemeEscaperooms(data.results));
     } catch (error) {
       console.error((error as Error).message);
     }
