@@ -27,7 +27,7 @@ export const escaperoomSlice = createSlice({
   },
 });
 
-export const { getAllEscaperooms, getByThemeEscaperooms } =
+export const { getAllEscaperooms, getByThemeEscaperooms, getByIdEscaperooms } =
   escaperoomSlice.actions;
 
 export const escaperoomReducer = escaperoomSlice.reducer;
