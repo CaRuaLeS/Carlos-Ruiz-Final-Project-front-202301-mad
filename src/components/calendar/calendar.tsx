@@ -50,8 +50,8 @@ export function CalendarWeek(week: number, offset: number, lastOfMonth: Date) {
 }
 
 export function CalendarDay(day: number | string, lastOfMonth: Date) {
-  if (day < 1) day = "";
-  if (day > lastOfMonth.getDate()) day = "";
+  // if (day < 1) day = "";
+  // if (day > lastOfMonth.getDate()) day = "";
   return (
     <td>
       <button

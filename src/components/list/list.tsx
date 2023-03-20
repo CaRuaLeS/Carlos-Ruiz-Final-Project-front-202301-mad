@@ -11,8 +11,7 @@ export function List() {
 
   useEffect(() => {
     escaperoomGetAll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [escaperoomGetAll]);
 
   return (
     <section className="list">
