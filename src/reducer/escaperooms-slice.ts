@@ -17,6 +17,9 @@ export const escaperoomSlice = createSlice({
     getAllEscaperooms(state, action: PayloadAction<EscapeRoomStructure[]>) {
       state.escapeRooms = action.payload;
     },
+    getByIdEscaperooms(state, action: PayloadAction<EscapeRoomStructure>) {
+      state.detailsRoom = action.payload;
+    },
     getByThemeEscaperooms(state, action: PayloadAction<EscapeRoomStructure>) {
       state.escapeRooms = [action.payload];
     },
@@ -24,7 +27,7 @@ export const escaperoomSlice = createSlice({
   },
 });
 
-export const { getAllEscaperooms, getByThemeEscaperooms } =
+export const { getAllEscaperooms, getByThemeEscaperooms, getByIdEscaperooms } =
   escaperoomSlice.actions;
 
 export const escaperoomReducer = escaperoomSlice.reducer;

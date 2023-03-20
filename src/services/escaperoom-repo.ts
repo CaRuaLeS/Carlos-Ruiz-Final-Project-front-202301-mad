@@ -18,6 +18,17 @@ export class EscaperoomsRepo implements RepoEscaperoom<ServerTypeEscapeRoom> {
     return data;
   }
 
+  async getById(roomId: string): Promise<ServerTypeEscapeRoom> {
+    const url = this.url + "/" + roomId;
+    const resp = await fetch(url);
+
+    if (!resp.ok)
+      throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
+
+    const data = await resp.json();
+    return data;
+  }
+
   async getByTheme(
     themeFilter: EscapeRoomStructure["theme"]
   ): Promise<ServerTypeEscapeRoom> {

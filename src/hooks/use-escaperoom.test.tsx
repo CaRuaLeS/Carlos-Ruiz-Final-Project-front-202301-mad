@@ -14,10 +14,11 @@ describe("Given the useEscaperooms hook", () => {
     mockRoomsRepo = {
       getByTheme: jest.fn(),
       getAll: jest.fn(),
+      getById: jest.fn(),
     } as unknown as EscaperoomsRepo;
 
     const TestERComponent = function () {
-      const { escaperoomGetAll, escaperoomGetByTheme } =
+      const { escaperoomGetAll, escaperoomGetByTheme, escaperoomGetById } =
         useEscapeRooms(mockRoomsRepo);
 
       return (
@@ -26,6 +27,7 @@ describe("Given the useEscaperooms hook", () => {
           <button onClick={() => escaperoomGetByTheme("test")}>
             getByTheme
           </button>
+          <button onClick={() => escaperoomGetById("1234")}>getById</button>
         </>
       );
     };
@@ -44,6 +46,7 @@ describe("Given the useEscaperooms hook", () => {
       const elements = await screen.findAllByRole("button");
       expect(elements[1]).toBeInTheDocument();
       expect(elements[0]).toBeInTheDocument();
+      expect(elements[2]).toBeInTheDocument();
     });
   });
 
@@ -52,6 +55,14 @@ describe("Given the useEscaperooms hook", () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[0]));
       expect(mockRoomsRepo.getAll).toHaveBeenCalled();
+    });
+  });
+
+  describe("when escaperoomGetById is called (testComponent)", () => {
+    test("then getById if the repo shouldve been called", async () => {
+      const mockButtons = await screen.findAllByRole("button");
+      await act(async () => userEvent.click(mockButtons[2]));
+      expect(mockRoomsRepo.getById).toHaveBeenCalled();
     });
   });
 
