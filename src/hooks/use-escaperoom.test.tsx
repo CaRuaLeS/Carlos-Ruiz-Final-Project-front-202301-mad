@@ -20,7 +20,7 @@ describe("Given the useEscaperooms hook", () => {
       getAll: jest.fn(),
     } as unknown as EscaperoomsRepo;
 
-    const TestComponent = function () {
+    const TestERComponent = function () {
       const { escaperoomGetAll, escaperoomGetByTheme } =
         useEscapeRooms(mockRepo);
 
@@ -37,7 +37,7 @@ describe("Given the useEscaperooms hook", () => {
     await act(async () =>
       render(
         <Provider store={store}>
-          <TestComponent></TestComponent>
+          <TestERComponent></TestERComponent>
         </Provider>
       )
     );

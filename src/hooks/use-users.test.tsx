@@ -22,7 +22,7 @@ describe("Given the useUsers hook", () => {
       create: jest.fn(),
     } as unknown as UsersRepo;
 
-    const TestComponent = function () {
+    const TestUserComponent = function () {
       const { userRegister, userLogin } = useUsers(mockRepo);
 
       return (
@@ -36,27 +36,27 @@ describe("Given the useUsers hook", () => {
     await act(async () =>
       render(
         <Provider store={store}>
-          <TestComponent></TestComponent>
+          <TestUserComponent></TestUserComponent>
         </Provider>
       )
     );
   });
 
-  describe("when the TestComponent is rendered", () => {
+  describe("when the TestUserComponent is rendered", () => {
     test("then the buttons should be in the document", async () => {
       const elements = await screen.findAllByRole("button");
       expect(elements[0]).toBeInTheDocument();
       expect(elements[1]).toBeInTheDocument();
     });
   });
-  describe("when the REGISTER button of TestComponent is called", () => {
+  describe("when the REGISTER button of TestUserComponent is called", () => {
     test("then the userRegister should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[0]));
       expect(mockRepo.create).toHaveBeenCalled();
     });
   });
-  describe("when the LOGIN button of TestComponent is called", () => {
+  describe("when the LOGIN button of TestUserComponent is called", () => {
     test("then the userLogin should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[1]));

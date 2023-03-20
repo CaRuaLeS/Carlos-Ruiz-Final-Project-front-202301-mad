@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EscapeRoomStructure } from "../model/escaperoom";
 import {
@@ -11,14 +12,15 @@ export function useEscapeRooms(repo: EscaperoomsRepo) {
   const escaperooms = useSelector((state: RootState) => state.escaperooms);
   const dispatch = useDispatch<AppDispatch>();
 
-  const escaperoomGetAll = async () => {
+  const escaperoomGetAll = useCallback(async () => {
     try {
       const data = await repo.getAll();
       dispatch(getAllEscaperooms(data.results));
     } catch (error) {
       console.error((error as Error).message);
     }
-  };
+  }, [dispatch, repo]);
+
   const escaperoomGetByTheme = async (theme: EscapeRoomStructure["theme"]) => {
     try {
       const data = await repo.getByTheme(theme);
