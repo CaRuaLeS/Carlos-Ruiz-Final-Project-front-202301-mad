@@ -17,7 +17,7 @@ export function AppRouter({ menuOptions }: AppRouterProps) {
         <Route path={menuOptions[0].path} element={<Home></Home>}></Route>
         <Route path={menuOptions[1].path} element={<Profile></Profile>}></Route>
         {/* No implementation (in progress)
-         <Route
+        <Route
           path={"/details/:escapeRoom"}
           element={<Details></Details>}
         ></Route> */}
