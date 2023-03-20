@@ -10,7 +10,7 @@ import { useUsers } from "./use-users";
 
 describe("Given the useUsers hook", () => {
   let mockPayload: UserStructure;
-  let mockRepo: UsersRepo;
+  let mockUsersRepo: UsersRepo;
 
   beforeEach(async () => {
     mockPayload = {
@@ -18,12 +18,12 @@ describe("Given the useUsers hook", () => {
       email: "test",
     } as unknown as UserStructure;
 
-    mockRepo = {
+    mockUsersRepo = {
       create: jest.fn(),
     } as unknown as UsersRepo;
 
     const TestUserComponent = function () {
-      const { userRegister, userLogin } = useUsers(mockRepo);
+      const { userRegister, userLogin } = useUsers(mockUsersRepo);
 
       return (
         <>
@@ -53,14 +53,14 @@ describe("Given the useUsers hook", () => {
     test("then the userRegister should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[0]));
-      expect(mockRepo.create).toHaveBeenCalled();
+      expect(mockUsersRepo.create).toHaveBeenCalled();
     });
   });
   describe("when the LOGIN button of TestUserComponent is called", () => {
     test("then the userLogin should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[1]));
-      expect(mockRepo.create).toHaveBeenCalled();
+      expect(mockUsersRepo.create).toHaveBeenCalled();
     });
   });
 });
