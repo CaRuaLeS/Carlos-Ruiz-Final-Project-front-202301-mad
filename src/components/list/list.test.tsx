@@ -4,7 +4,6 @@ import { render, act, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { EscaperoomState } from "../../reducer/escaperooms-slice";
-import { EscaperoomsRepo } from "../../services/escaperoom-repo";
 import { store } from "../../store/store";
 import { Card } from "../card/card";
 import { List } from "./list";
