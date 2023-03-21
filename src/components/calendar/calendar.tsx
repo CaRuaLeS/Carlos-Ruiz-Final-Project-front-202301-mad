@@ -55,7 +55,7 @@ export function Calendar({ monthOffset }: Props) {
             <th>Sat</th>
           </tr>
         </thead>
-        {rows}
+        <tbody>{rows}</tbody>
       </table>
     </>
   );
