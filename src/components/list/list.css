@@ -1,0 +1,19 @@
+.list {
+  text-align: center;
+}
+
+.list__ul {
+  list-style-type: none;
+  display: grid;
+  /* grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(25rem/1, max(50rem/3)), 1fr)); */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(0, min(100%/1, max(25rem, 80%/3)))
+  );
+  padding: 0;
+  justify-self: center;
+  justify-content: center;
+  row-gap: 2rem;
+}

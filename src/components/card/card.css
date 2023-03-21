@@ -1,0 +1,17 @@
+.room-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-card__image {
+  max-width: 80%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.room-card__details {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}

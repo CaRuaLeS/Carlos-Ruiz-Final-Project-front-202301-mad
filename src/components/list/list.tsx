@@ -1,3 +1,4 @@
+import "./list.css";
 import { useEffect, useMemo } from "react";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { EscapeRoomStructure } from "../../model/escaperoom";

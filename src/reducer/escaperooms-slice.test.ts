@@ -43,7 +43,7 @@ describe("Given the escaperoomSlice", () => {
         payload: mockEscapeRoom,
       };
       const element = escaperoomReducer(mockInitialState, mockgetByThemeAction);
-      expect(element.escapeRooms).toEqual([mockEscapeRoom]);
+      expect(element.escapeRooms).toEqual(mockEscapeRoom);
     });
   });
 });
