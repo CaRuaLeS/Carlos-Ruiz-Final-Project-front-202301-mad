@@ -29,7 +29,7 @@ function Details() {
         <div className="details-info">
           <img
             className="details-info__image"
-            src={escaperooms.detailsRoom.images![1]}
+            src={escaperooms.detailsRoom.images?.[1]}
             alt={`Details ${escaperooms.detailsRoom.name}`}
           />
           <div className="details-info__specs">
