@@ -14,7 +14,7 @@ function Details() {
 
   useEffect(() => {
     escaperoomGetById(roomIdString!);
-  }, [escaperoomGetById]);
+  }, [escaperoomGetById, roomIdString]);
 
   const [monthNum, setMoreNumber] = useState(0);
 
