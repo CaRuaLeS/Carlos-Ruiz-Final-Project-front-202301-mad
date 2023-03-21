@@ -18,7 +18,7 @@ function Details() {
 
   const [monthNum, setMoreNumber] = useState(0);
 
-  function handlerButtom(num: number) {
+  function handlerButton(num: number) {
     setMoreNumber(monthNum + num);
   }
 
@@ -42,8 +42,8 @@ function Details() {
           </p>
         </div>
         <div className="details-calendar">
-          <button onClick={() => handlerButtom(-1)}>Prev</button>
-          <button onClick={() => handlerButtom(1)}>Next</button>
+          <button onClick={() => handlerButton(-1)}>Prev</button>
+          <button onClick={() => handlerButton(1)}>Next</button>
           <Calendar monthOffset={monthNum}></Calendar>
         </div>
       </section>
