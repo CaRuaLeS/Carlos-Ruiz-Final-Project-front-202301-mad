@@ -9,16 +9,21 @@ import { EscaperoomState } from "../../reducer/escaperooms-slice";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { Calendar } from "../calendar/calendar";
 
-// A interface mockProp {
+// Trying to mock a component IN PROCESS
+// interface mockProp {
 //   mockMonthOffset: number;
 // }
+// const comp =
+//   () =>
+//   ({ mockMonthOffset }: mockProp) => {
+//     return <div data-testid="calendar">{mockMonthOffset}</div>;
+//   };
 
 jest.mock("../../hooks/use-escaperooms");
 jest.mock(
   "../calendar/calendar"
-  // A , () => ({ mockMonthOffset }: mockProp) => (
-  //   <div data-testid="calendar">{mockMonthOffset}</div>
-  // )
+  // Part of the mock component
+  //, () => comp
 );
 
 describe("Given Details component", () => {
