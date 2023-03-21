@@ -22,14 +22,17 @@ export function useEscapeRooms(repo: EscaperoomsRepo) {
     }
   }, [dispatch, repo]);
 
-  const escaperoomGetById = async (roomId: string) => {
-    try {
-      const data = await repo.getById(roomId);
-      dispatch(getByIdEscaperooms(data.results[0]));
-    } catch (error) {
-      console.error((error as Error).message);
-    }
-  };
+  const escaperoomGetById = useCallback(
+    async (roomId: string) => {
+      try {
+        const data = await repo.getById(roomId);
+        dispatch(getByIdEscaperooms(data.results[0]));
+      } catch (error) {
+        console.error((error as Error).message);
+      }
+    },
+    [dispatch, repo]
+  );
 
   const escaperoomGetByTheme = async (theme: EscapeRoomStructure["theme"]) => {
     try {

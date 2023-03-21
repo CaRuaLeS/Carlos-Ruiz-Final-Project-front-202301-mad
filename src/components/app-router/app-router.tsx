@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { MenuOption } from "../app/app";
+import Details from "../details/details";
 
 const Home = lazy(() => import("../home/home"));
 const Profile = lazy(() => import("../profile/profile"));
@@ -16,11 +17,10 @@ export function AppRouter({ menuOptions }: AppRouterProps) {
         <Route path={"/"} element={<Home></Home>}></Route>
         <Route path={menuOptions[0].path} element={<Home></Home>}></Route>
         <Route path={menuOptions[1].path} element={<Profile></Profile>}></Route>
-        {/* No implementation (in progress)
         <Route
           path={"/details/:escapeRoom"}
           element={<Details></Details>}
-        ></Route> */}
+        ></Route>
         {/* Ruta para la pagina de error */}
       </Routes>
     </Suspense>
