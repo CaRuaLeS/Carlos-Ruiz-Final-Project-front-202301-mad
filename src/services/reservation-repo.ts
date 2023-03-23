@@ -22,6 +22,7 @@ export class ReservationsRepo
       method: "POST",
       body: JSON.stringify(reservationInfo),
       headers: {
+        // PONER TOKEN
         "Content-type": "application/json",
       },
     });
