@@ -23,7 +23,7 @@ export function Calendar({ monthOffset, roomId }: Props) {
     user: "",
   } as ReserveInfo);
 
-  // #region Calendar construction
+  // #region Calendar logic
   const now = new Date();
   const yearOffset = monthOffset / 12;
   const normalizedMonthOffset = monthOffset % 12;
