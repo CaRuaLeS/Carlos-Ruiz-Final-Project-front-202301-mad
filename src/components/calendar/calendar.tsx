@@ -1,8 +1,29 @@
+import { useEffect, useMemo, useState } from "react";
+import { useReservations } from "../../hooks/use-reservations";
+import { ReservationsRepo } from "../../services/reservation-repo";
+import { CalendarReserve } from "../calendarReserve/calendar-reserve";
+import { CalendarWeek } from "./calendar-week";
+
+export type ReserveInfo = {
+  active: boolean;
+  date: string;
+  escaperoom: string;
+  user: string;
+};
 interface Props {
   monthOffset: number;
+  roomId: string;
 }
 
-export function Calendar({ monthOffset }: Props) {
+export function Calendar({ monthOffset, roomId }: Props) {
+  const [reservation, setReservation] = useState({
+    active: false,
+    date: "",
+    escaperoom: "",
+    user: "",
+  } as ReserveInfo);
+
+  // #region Calendar construction
   const now = new Date();
   const yearOffset = monthOffset / 12;
   const normalizedMonthOffset = monthOffset % 12;
@@ -20,9 +41,21 @@ export function Calendar({ monthOffset }: Props) {
   const offset = -firstWeekDayOfMonth;
   const rows = [];
   for (let i = 0; i < 6; i++) {
-    rows.push(CalendarWeek(i, offset, lastOfMonth));
+    rows.push(
+      <CalendarWeek
+        key={i + 10}
+        week={i}
+        lastOfMonth={lastOfMonth}
+        offset={offset}
+        reserveSet={
+          setReservation as React.Dispatch<
+            React.SetStateAction<Partial<ReserveInfo>>
+          >
+        }
+      />
+      //CalendarWeek(i, offset, lastOfMonth)
+    );
   }
-
   const month = [
     "January",
     "February",
@@ -37,6 +70,24 @@ export function Calendar({ monthOffset }: Props) {
     "November",
     "December",
   ];
+  // #endregion
+
+  const repoReservations = useMemo(() => new ReservationsRepo(), []);
+  const { reservationGetFilterMonth } = useReservations(repoReservations);
+  const yearMonth: string =
+    lastOfMonth.getFullYear() + "-" + (firstOfMonth.getMonth() + 1);
+
+  useEffect(() => {
+    reservationGetFilterMonth(yearMonth, roomId);
+    setReservation({ ...reservation, escaperoom: roomId, user: "12345" });
+    console.log(roomId);
+    console.log(reservation);
+  }, [
+    reservationGetFilterMonth,
+    yearMonth,
+    setReservation,
+    reservation.escaperoom,
+  ]);
 
   return (
     <>
@@ -57,33 +108,9 @@ export function Calendar({ monthOffset }: Props) {
         </thead>
         <tbody>{rows}</tbody>
       </table>
+      {reservation.active ? (
+        <CalendarReserve reservation={reservation}></CalendarReserve>
+      ) : undefined}
     </>
-  );
-}
-
-export function CalendarWeek(week: number, offset: number, lastOfMonth: Date) {
-  const days = [];
-  for (let i = 0; i < 7; i++) {
-    days.push(CalendarDay(week * 7 + i + offset + 1, lastOfMonth));
-  }
-
-  return <tr>{days}</tr>;
-}
-
-export function CalendarDay(day: number | string, lastOfMonth: Date) {
-  if (day < 1) day = "";
-  if (day > lastOfMonth.getDate()) day = "";
-  return (
-    <td>
-      <button
-        onClick={() =>
-          console.log(
-            `${day}/${lastOfMonth.getMonth() + 1}/${lastOfMonth.getFullYear()}`
-          )
-        }
-      >
-        {day}
-      </button>
-    </td>
   );
 }
