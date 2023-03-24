@@ -1,7 +1,6 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { useReservations } from "../../hooks/use-reservations";
 import { CalendarDay } from "./calendar-day";
 
