@@ -4,8 +4,6 @@ import { useParams } from "react-router-dom";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { EscaperoomsRepo } from "../../services/escaperoom-repo";
 import { Calendar } from "../calendar/calendar";
-import { ReservationsRepo } from "../../services/reservation-repo";
-import { useReservations } from "../../hooks/use-reservations";
 
 function Details() {
   const { escapeRoom } = useParams();
@@ -44,7 +42,9 @@ function Details() {
           </p>
         </div>
         <div className="details-calendar">
-          <button onClick={() => handlerButton(-1)}>Prev</button>
+          <button onClick={() => handlerButton(-1)} disabled={monthNum <= 0}>
+            Prev
+          </button>
           <button onClick={() => handlerButton(1)}>Next</button>
           <Calendar monthOffset={monthNum} roomId={roomIdString!}></Calendar>
         </div>
