@@ -4,13 +4,15 @@ import { useParams } from "react-router-dom";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { EscaperoomsRepo } from "../../services/escaperoom-repo";
 import { Calendar } from "../calendar/calendar";
+import { ReservationsRepo } from "../../services/reservation-repo";
+import { useReservations } from "../../hooks/use-reservations";
 
 function Details() {
   const { escapeRoom } = useParams();
   const roomIdString = escapeRoom;
 
-  const repo = useMemo(() => new EscaperoomsRepo(), []);
-  const { escaperooms, escaperoomGetById } = useEscapeRooms(repo);
+  const repoEscaperoom = useMemo(() => new EscaperoomsRepo(), []);
+  const { escaperooms, escaperoomGetById } = useEscapeRooms(repoEscaperoom);
 
   useEffect(() => {
     escaperoomGetById(roomIdString!);
@@ -44,7 +46,7 @@ function Details() {
         <div className="details-calendar">
           <button onClick={() => handlerButton(-1)}>Prev</button>
           <button onClick={() => handlerButton(1)}>Next</button>
-          <Calendar monthOffset={monthNum}></Calendar>
+          <Calendar monthOffset={monthNum} roomId={roomIdString!}></Calendar>
         </div>
       </section>
     </>
