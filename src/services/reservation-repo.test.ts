@@ -62,12 +62,12 @@ describe("Given the reservations repo", () => {
     test("then if fetch is OK it should give nothing", async () => {
       goodFetch(mockValue);
       // eslint-disable-next-line testing-library/no-await-sync-query
-      const result = await repo.getByUser("123");
+      const result = await repo.getByUser();
       expect(result).toEqual(mockValue);
     });
     test("the if fetch is NOT OK it throws", async () => {
       badFetch();
-      const result = repo.getByUser("123");
+      const result = repo.getByUser();
       await expect(result).rejects.toThrow();
     });
   });
