@@ -6,25 +6,29 @@ import { CalendarDay } from "./calendar-day";
 
 jest.mock("../../hooks/use-reservations");
 
+const setState = jest.fn();
+const groupMockElements = async (mockStateDate: string, mockDay: number) => {
+  (useReservations as jest.Mock).mockReturnValue({
+    reservations: {
+      reservations: [{ reserveDate: mockStateDate }],
+    },
+  });
+
+  await act(async () => {
+    render(
+      <CalendarDay
+        day={mockDay}
+        lastOfMonth={new Date(2023 - 3 - 31)}
+        reserveSet={setState}
+      />
+    );
+  });
+};
+
 describe("Given the CalendarDay component", () => {
-  const setState = jest.fn();
   describe("when the day is equal to the reserveDate", () => {
     beforeEach(async () => {
-      (useReservations as jest.Mock).mockReturnValue({
-        reservations: {
-          reservations: [{ reserveDate: "2023-3-1" }],
-        },
-      });
-
-      await act(async () => {
-        render(
-          <CalendarDay
-            day={1}
-            lastOfMonth={new Date(2023 - 3 - 31)}
-            reserveSet={setState}
-          />
-        );
-      });
+      groupMockElements("2023-3-1", 1);
     });
     test("then the button should be disabled", () => {
       const element = screen.getByRole("button");
@@ -34,21 +38,7 @@ describe("Given the CalendarDay component", () => {
   });
   describe("when the day is not reserve and the button is pressed", () => {
     beforeEach(async () => {
-      (useReservations as jest.Mock).mockReturnValue({
-        reservations: {
-          reservations: [{ reserveDate: "2023-3-1" }],
-        },
-      });
-
-      await act(async () => {
-        render(
-          <CalendarDay
-            day={0}
-            lastOfMonth={new Date(2023 - 3 - 31)}
-            reserveSet={setState}
-          />
-        );
-      });
+      groupMockElements("2023-3-1", 0);
     });
     test("then it should call the reserveSet(setState)", async () => {
       const element = screen.getByRole("button");
@@ -58,21 +48,7 @@ describe("Given the CalendarDay component", () => {
   });
   describe("when the day set is less than 1", () => {
     beforeEach(async () => {
-      (useReservations as jest.Mock).mockReturnValue({
-        reservations: {
-          reservations: [{ reserveDate: "2023-3-1" }],
-        },
-      });
-
-      await act(async () => {
-        render(
-          <CalendarDay
-            day={0}
-            lastOfMonth={new Date(2023 - 3 - 31)}
-            reserveSet={setState}
-          />
-        );
-      });
+      groupMockElements("2023-3-1", 0);
     });
     test("then it should display nothing", async () => {
       const element = screen.getByRole("button");
@@ -82,21 +58,7 @@ describe("Given the CalendarDay component", () => {
   });
   describe("when the day set is more than the last day of the month", () => {
     beforeEach(async () => {
-      (useReservations as jest.Mock).mockReturnValue({
-        reservations: {
-          reservations: [{ reserveDate: "2023-3-1" }],
-        },
-      });
-
-      await act(async () => {
-        render(
-          <CalendarDay
-            day={32}
-            lastOfMonth={new Date(2023 - 3 - 31)}
-            reserveSet={setState}
-          />
-        );
-      });
+      groupMockElements("2023-3-1", 32);
     });
     test("then it should display nothing", async () => {
       const element = screen.getByRole("button");
