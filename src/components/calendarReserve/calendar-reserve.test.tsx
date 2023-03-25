@@ -1,9 +1,8 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import { Provider, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
-import { store } from "../../store/store";
 import { ReserveInfo } from "../calendar/calendar";
 import { CalendarReserve } from "./calendar-reserve";
 
