@@ -3,6 +3,7 @@ import { ReservationsRepo } from "../../services/reservation-repo";
 import { useReservations } from "../../hooks/use-reservations";
 import { UsersRepo } from "../../services/user-repo";
 import { useUsers } from "../../hooks/use-users";
+import { ProfileCard } from "../profile-card/profile-card";
 
 export function LoggedAccount() {
   const repoReservations = new ReservationsRepo();
@@ -17,9 +18,22 @@ export function LoggedAccount() {
   }, []);
 
   return (
-    <section className="list">
-      <div>list account</div>
-      <ul className="list__ul">{}</ul>
-    </section>
+    <>
+      <section>
+        <img
+          src={users.userLogged.avatar}
+          alt={`Profile pic of: ${users.userLogged.username}`}
+        ></img>
+        <h2>{users.userLogged.username}</h2>
+      </section>
+      <section className="list">
+        <div>list account</div>
+        <ul className="list__ul">
+          {reservations.userReservations.map((item) => (
+            <ProfileCard key={item.id} reserves={item} />
+          ))}
+        </ul>
+      </section>
+    </>
   );
 }
