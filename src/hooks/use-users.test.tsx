@@ -20,15 +20,22 @@ describe("Given the useUsers hook", () => {
 
     mockUsersRepo = {
       create: jest.fn(),
+      update: jest.fn(),
+      readId: jest.fn(),
     } as unknown as UsersRepo;
 
     const TestUserComponent = function () {
-      const { userRegister, userLogin } = useUsers(mockUsersRepo);
+      const { userRegister, userLogin, userUpdate, userReadId } =
+        useUsers(mockUsersRepo);
 
       return (
         <>
           <button onClick={() => userRegister(mockPayload)}>register</button>
           <button onClick={() => userLogin(mockPayload)}>login</button>
+          <button onClick={() => userUpdate(mockPayload, "testToken")}>
+            update
+          </button>
+          <button onClick={() => userReadId("testToken")}>readId</button>
         </>
       );
     };
@@ -47,6 +54,8 @@ describe("Given the useUsers hook", () => {
       const elements = await screen.findAllByRole("button");
       expect(elements[0]).toBeInTheDocument();
       expect(elements[1]).toBeInTheDocument();
+      expect(elements[2]).toBeInTheDocument();
+      expect(elements[3]).toBeInTheDocument();
     });
   });
   describe("when the REGISTER button of TestUserComponent is called", () => {
@@ -61,6 +70,20 @@ describe("Given the useUsers hook", () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[1]));
       expect(mockUsersRepo.create).toHaveBeenCalled();
+    });
+  });
+  describe("when the USERUPDATE button of TestUserComponent is called", () => {
+    test("then the update of the repo should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      await act(async () => userEvent.click(elements[2]));
+      expect(mockUsersRepo.update).toHaveBeenCalled();
+    });
+  });
+  describe("when the USERREADID button of TestUserComponent is called", () => {
+    test("then the readId of the repo should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      await act(async () => userEvent.click(elements[3]));
+      expect(mockUsersRepo.readId).toHaveBeenCalled();
     });
   });
 });
