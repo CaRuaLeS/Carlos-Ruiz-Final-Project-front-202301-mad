@@ -8,7 +8,6 @@ export type State = {
 
 const initialState: State = {
   userLogged: {
-    id: "",
     token: localStorage.getItem("token"),
   } as Partial<UserStructure>,
   users: [],

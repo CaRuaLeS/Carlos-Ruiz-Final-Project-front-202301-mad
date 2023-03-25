@@ -40,7 +40,7 @@ describe("Given the useReservations", () => {
         <>
           <button onClick={() => reservationCreate(mockPayload)}>create</button>
           <button onClick={() => reservationDelete("123")}>delete</button>
-          <button onClick={() => reservationGetUser("12345")}>getUser</button>
+          <button onClick={() => reservationGetUser()}>getUser</button>
           <button onClick={() => reservationGetFilterMonth("2023-4", "12345")}>
             monthFilter
           </button>

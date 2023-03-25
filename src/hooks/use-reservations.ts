@@ -39,17 +39,14 @@ export function useReservations(repo: ReservationsRepo) {
       console.error((error as Error).message);
     }
   }, [dispatch, repo]);
-  const reservationGetUser = useCallback(
-    async (userId: string) => {
-      try {
-        const data = await repo.getByUser(userId);
-        dispatch(getUserReservations(data.results));
-      } catch (error) {
-        console.error((error as Error).message);
-      }
-    },
-    [dispatch, repo]
-  );
+  const reservationGetUser = useCallback(async () => {
+    try {
+      const data = await repo.getByUser();
+      dispatch(getUserReservations(data.results));
+    } catch (error) {
+      console.error((error as Error).message);
+    }
+  }, [dispatch, repo]);
   const reservationGetFilterMonth = useCallback(
     async (dateYearMonth: string, escaperoomId: string) => {
       try {
