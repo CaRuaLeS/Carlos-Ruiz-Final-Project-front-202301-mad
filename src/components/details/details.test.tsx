@@ -65,10 +65,17 @@ describe("Given Details component", () => {
   describe("when the buttons are pressed", () => {
     test("then both buttons should be in the document and fired", () => {
       const button = screen.getAllByRole("button");
-      fireEvent.click(button[0]);
       fireEvent.click(button[1]);
-      expect(button[0]).toBeInTheDocument();
+      fireEvent.click(button[0]);
       expect(button[1]).toBeInTheDocument();
+      expect(button[0]).toBeInTheDocument();
+    });
+  });
+  describe("when you try to press the button preview first", () => {
+    test("then it is disabled", () => {
+      const button = screen.getAllByRole("button");
+      fireEvent.click(button[0]);
+      expect(button[0]).toHaveAttribute("disabled");
     });
   });
 });

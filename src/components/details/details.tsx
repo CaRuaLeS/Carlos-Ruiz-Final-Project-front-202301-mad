@@ -9,8 +9,8 @@ function Details() {
   const { escapeRoom } = useParams();
   const roomIdString = escapeRoom;
 
-  const repo = useMemo(() => new EscaperoomsRepo(), []);
-  const { escaperooms, escaperoomGetById } = useEscapeRooms(repo);
+  const repoEscaperoom = useMemo(() => new EscaperoomsRepo(), []);
+  const { escaperooms, escaperoomGetById } = useEscapeRooms(repoEscaperoom);
 
   useEffect(() => {
     escaperoomGetById(roomIdString!);
@@ -42,9 +42,15 @@ function Details() {
           </p>
         </div>
         <div className="details-calendar">
-          <button onClick={() => handlerButton(-1)}>Prev</button>
+          <button onClick={() => handlerButton(-1)} disabled={monthNum <= 0}>
+            Prev
+          </button>
           <button onClick={() => handlerButton(1)}>Next</button>
-          <Calendar monthOffset={monthNum}></Calendar>
+          <Calendar
+            key={1}
+            monthOffset={monthNum}
+            roomId={roomIdString!}
+          ></Calendar>
         </div>
       </section>
     </>
