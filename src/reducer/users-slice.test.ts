@@ -45,4 +45,37 @@ describe("Given the userSlice", () => {
       expect(element.userLogged.token).toBe(undefined);
     });
   });
+  describe("When the method UPDATEUSER is called", () => {
+    const mockUpdateInitialState: State = {
+      userLogged: {
+        username: "foo",
+        avatar: "12345",
+      } as UserStructure,
+      users: [],
+    };
+    const mockUpdate = {
+      username: "pepe",
+    } as UserStructure;
+    test("Then it should return the state undefined", () => {
+      const mockLoadUser: PayloadAction<UserStructure> = {
+        type: "user/updateUser",
+        payload: mockUpdate,
+      };
+      const element = userReducer(mockUpdateInitialState, mockLoadUser);
+      expect(element.userLogged).toStrictEqual({
+        username: "pepe",
+        avatar: "12345",
+      });
+    });
+  });
+  describe("When the method LOADUSER is called", () => {
+    test("Then it should return the state undefined", () => {
+      const mockLoadUser: PayloadAction<UserStructure> = {
+        type: "user/loadUser",
+        payload: mockUser,
+      };
+      const element = userReducer(mockInitialState, mockLoadUser);
+      expect(element.userLogged).toBe(mockUser);
+    });
+  });
 });

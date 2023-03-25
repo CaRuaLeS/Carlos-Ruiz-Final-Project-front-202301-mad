@@ -8,6 +8,8 @@ export type State = {
 
 const initialState: State = {
   userLogged: {
+    username: "",
+    avatar: "",
     token: localStorage.getItem("token"),
   } as Partial<UserStructure>,
   users: [],
@@ -28,9 +30,16 @@ export const userSlice = createSlice({
       localStorage.removeItem("token");
       state.userLogged.token = undefined;
     },
+    updateUser(state, action: PayloadAction<UserStructure>) {
+      state.userLogged = { ...state.userLogged, ...action.payload };
+    },
+    loadUser(state, action: PayloadAction<UserStructure>) {
+      state.userLogged = action.payload;
+    },
   },
 });
 
-export const { register, login, logout } = userSlice.actions;
+export const { register, login, logout, updateUser, loadUser } =
+  userSlice.actions;
 
 export const userReducer = userSlice.reducer;
