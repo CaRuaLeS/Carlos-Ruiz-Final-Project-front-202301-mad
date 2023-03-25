@@ -34,12 +34,12 @@ describe("Given the reservations repo", () => {
     const mockValue = {};
     test("then if fetch is OK it should give back the data", async () => {
       goodFetch(mockValue);
-      const result = await repo.create(mockValue);
+      const result = await repo.create(mockValue, "tokenTest");
       expect(result).toEqual(mockValue);
     });
     test("the if fetch is NOT OK it throws", async () => {
       badFetch();
-      const result = repo.create(mockValue);
+      const result = repo.create(mockValue, "tokenTest");
       await expect(result).rejects.toThrow();
     });
   });
@@ -48,12 +48,12 @@ describe("Given the reservations repo", () => {
       const mockValue = {};
 
       goodFetch(mockValue);
-      const result = await repo.delete("2");
+      const result = await repo.delete("2", "tokenTest");
       expect(result).toEqual({});
     });
     test("the if fetch is NOT OK it throws", async () => {
       badFetch();
-      const result = repo.delete("2");
+      const result = repo.delete("2", "tokenTest");
       await expect(result).rejects.toThrow();
     });
   });
@@ -62,12 +62,12 @@ describe("Given the reservations repo", () => {
     test("then if fetch is OK it should give nothing", async () => {
       goodFetch(mockValue);
       // eslint-disable-next-line testing-library/no-await-sync-query
-      const result = await repo.getByUser();
+      const result = await repo.getByUser("tokenTest");
       expect(result).toEqual(mockValue);
     });
     test("the if fetch is NOT OK it throws", async () => {
       badFetch();
-      const result = repo.getByUser();
+      const result = repo.getByUser("tokenTest");
       await expect(result).rejects.toThrow();
     });
   });
