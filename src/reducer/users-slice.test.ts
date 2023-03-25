@@ -11,6 +11,7 @@ const mockUser = {
   password: mockPasswd,
 };
 const mockInitialState: State = {
+  extraInfo: {},
   userLogged: {} as UserStructure,
   users: [],
 };
@@ -27,13 +28,16 @@ describe("Given the userSlice", () => {
     });
   });
   describe("When the method LOGIN is called", () => {
+    const mockExtra = {
+      token: "12345",
+    } as unknown as UserStructure;
     test("Then it should return in element.userLogged the mock user as an object", () => {
       const mockLoginAction: PayloadAction<UserStructure> = {
         type: "user/login",
-        payload: mockUser,
+        payload: mockExtra,
       };
       const element = userReducer(mockInitialState, mockLoginAction);
-      expect(element.userLogged).toBe(mockUser);
+      expect(element.extraInfo).toBe(mockExtra);
     });
   });
   describe("When the method LOGOUT is called", () => {
@@ -47,6 +51,7 @@ describe("Given the userSlice", () => {
   });
   describe("When the method UPDATEUSER is called", () => {
     const mockUpdateInitialState: State = {
+      extraInfo: {},
       userLogged: {
         username: "foo",
         avatar: "12345",

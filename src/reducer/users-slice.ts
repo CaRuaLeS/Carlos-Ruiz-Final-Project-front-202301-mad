@@ -2,16 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserStructure } from "../model/user";
 
 export type State = {
+  extraInfo: Partial<UserStructure>;
   userLogged: Partial<UserStructure>;
   users: UserStructure[];
 };
 
 const initialState: State = {
-  userLogged: {
-    username: "",
-    avatar: "",
+  extraInfo: {
     token: localStorage.getItem("token"),
-  } as Partial<UserStructure>,
+  },
+  userLogged: {},
   users: [],
 };
 
@@ -24,11 +24,11 @@ export const userSlice = createSlice({
     },
     login(state, action: PayloadAction<UserStructure>) {
       localStorage.setItem("token", action.payload.token!);
-      state.userLogged = action.payload;
+      state.extraInfo = action.payload;
     },
     logout(state) {
       localStorage.removeItem("token");
-      state.userLogged.token = undefined;
+      state.extraInfo.token = null;
     },
     updateUser(state, action: PayloadAction<UserStructure>) {
       state.userLogged = { ...state.userLogged, ...action.payload };
