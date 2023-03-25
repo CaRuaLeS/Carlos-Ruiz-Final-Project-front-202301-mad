@@ -4,7 +4,7 @@ export type UserStructure = {
   email: string;
   password: string;
   avatar?: string;
-  token?: string;
+  token?: string | null;
 };
 
 export type ServerTypeUser = {
