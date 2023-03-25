@@ -28,12 +28,21 @@ describe("Given the userSlice", () => {
   });
   describe("When the method LOGIN is called", () => {
     test("Then it should return in element.userLogged the mock user as an object", () => {
-      const mockRegisterAction: PayloadAction<UserStructure> = {
+      const mockLoginAction: PayloadAction<UserStructure> = {
         type: "user/login",
         payload: mockUser,
       };
-      const element = userReducer(mockInitialState, mockRegisterAction);
+      const element = userReducer(mockInitialState, mockLoginAction);
       expect(element.userLogged).toBe(mockUser);
+    });
+  });
+  describe("When the method LOGOUT is called", () => {
+    test("Then it should return the state undefined", () => {
+      const mockLogout = {
+        type: "user/logout",
+      };
+      const element = userReducer(mockInitialState, mockLogout);
+      expect(element.userLogged.token).toBe(undefined);
     });
   });
 });
