@@ -29,6 +29,24 @@ export class UsersRepo implements RepoUser<ServerTypeUser> {
     return data;
   }
 
+  async readId(token: string): Promise<ServerTypeUser> {
+    const url = this.url + "/profile";
+
+    const resp = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
+
+    const data = await resp.json();
+
+    return data;
+  }
+
   async update(
     userInfo: Partial<UserStructure>,
     urlExtraPath: string,
