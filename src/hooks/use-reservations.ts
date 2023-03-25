@@ -15,17 +15,20 @@ export function useReservations(repo: ReservationsRepo) {
   const reservations = useSelector((state: RootState) => state.reservations);
   const dispatch = useDispatch<AppDispatch>();
 
-  const reservationCreate = async (info: Partial<ReservationStructure>) => {
+  const reservationCreate = async (
+    info: Partial<ReservationStructure>,
+    token: string
+  ) => {
     try {
-      const data = await repo.create(info);
+      const data = await repo.create(info, token);
       dispatch(create(data.results[0]));
     } catch (error) {
       console.error((error as Error).message);
     }
   };
-  const reservationDelete = async (id: string) => {
+  const reservationDelete = async (id: string, token: string) => {
     try {
-      await repo.delete(id);
+      await repo.delete(id, token);
       dispatch(deleteReservation(id));
     } catch (error) {
       console.error((error as Error).message);
@@ -39,14 +42,17 @@ export function useReservations(repo: ReservationsRepo) {
       console.error((error as Error).message);
     }
   }, [dispatch, repo]);
-  const reservationGetUser = useCallback(async () => {
-    try {
-      const data = await repo.getByUser();
-      dispatch(getUserReservations(data.results));
-    } catch (error) {
-      console.error((error as Error).message);
-    }
-  }, [dispatch, repo]);
+  const reservationGetUser = useCallback(
+    async (token: string) => {
+      try {
+        const data = await repo.getByUser(token);
+        dispatch(getUserReservations(data.results));
+      } catch (error) {
+        console.error((error as Error).message);
+      }
+    },
+    [dispatch, repo]
+  );
   const reservationGetFilterMonth = useCallback(
     async (dateYearMonth: string, escaperoomId: string) => {
       try {
