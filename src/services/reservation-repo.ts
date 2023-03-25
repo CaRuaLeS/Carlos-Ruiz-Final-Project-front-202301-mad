@@ -62,8 +62,8 @@ export class ReservationsRepo
     return data;
   }
 
-  async getByUser(userId: string): Promise<ServerTypeReservation> {
-    const url = this.url + "/user/" + userId;
+  async getByUser(): Promise<ServerTypeReservation> {
+    const url = this.url + "/user";
     const resp = await fetch(url);
 
     if (!resp.ok)
