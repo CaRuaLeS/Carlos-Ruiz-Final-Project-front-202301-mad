@@ -46,7 +46,11 @@ function Details() {
             Prev
           </button>
           <button onClick={() => handlerButton(1)}>Next</button>
-          <Calendar monthOffset={monthNum} roomId={roomIdString!}></Calendar>
+          <Calendar
+            key={1}
+            monthOffset={monthNum}
+            roomId={roomIdString!}
+          ></Calendar>
         </div>
       </section>
     </>
