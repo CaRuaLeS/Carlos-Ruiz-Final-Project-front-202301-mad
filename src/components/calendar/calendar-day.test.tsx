@@ -32,7 +32,6 @@ describe("Given the CalendarDay component", () => {
     });
     test("then the button should be disabled", () => {
       const element = screen.getByRole("button");
-      // await fireEvent.click(element);
       expect(element).toHaveAttribute("disabled");
     });
   });
@@ -52,7 +51,6 @@ describe("Given the CalendarDay component", () => {
     });
     test("then it should display nothing", async () => {
       const element = screen.getByRole("button");
-      //await fireEvent.click(element);
       expect(element).toHaveTextContent("");
     });
   });
@@ -62,7 +60,6 @@ describe("Given the CalendarDay component", () => {
     });
     test("then it should display nothing", async () => {
       const element = screen.getByRole("button");
-      //await fireEvent.click(element);
       expect(element).toHaveTextContent("");
     });
   });
