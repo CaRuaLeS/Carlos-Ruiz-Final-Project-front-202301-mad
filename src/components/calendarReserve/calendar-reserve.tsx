@@ -1,5 +1,3 @@
-import { useReservations } from "../../hooks/use-reservations";
-import { ReservationsRepo } from "../../services/reservation-repo";
 import { ReserveInfo } from "../calendar/calendar";
 
 interface reservationCalendar {
@@ -7,14 +5,17 @@ interface reservationCalendar {
 }
 
 export function CalendarReserve({ reservation }: reservationCalendar) {
-  const repoReservations = new ReservationsRepo();
-  const { reservationCreate } = useReservations(repoReservations);
+  // TEMP
+  // const repoReservations = new ReservationsRepo();
+  // // TEMP
+  // const { reservationCreate } = useReservations(repoReservations);
 
-  const reserve = {
-    reserveDate: reservation.date,
-    escaperoom: reservation.escaperoom,
-    user: reservation.user,
-  };
+  // TEMP
+  // const reserve = {
+  //   reserveDate: reservation.date,
+  //   escaperoom: reservation.escaperoom,
+  //   user: reservation.user,
+  // };
 
   return (
     <>
