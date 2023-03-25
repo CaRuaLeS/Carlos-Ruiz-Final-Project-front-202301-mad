@@ -1,11 +1,11 @@
 /* eslint-disable testing-library/no-render-in-setup */
 import { fireEvent, render, screen } from "@testing-library/react";
-import { LogIn } from "../../login/login";
-import { Register } from "../../register/register";
+import { LogIn } from "../login/login";
+import { Register } from "../register/register";
 import NotLogged from "./not-logged";
 
-jest.mock("../../register/register");
-jest.mock("../../login/login");
+jest.mock("../login/login");
+jest.mock("../register/register");
 
 beforeEach(() => {
   render(<NotLogged></NotLogged>);

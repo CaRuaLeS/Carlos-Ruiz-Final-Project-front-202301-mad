@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { LogIn } from "../../login/login";
-import { Register } from "../../register/register";
+import { LogIn } from "../login/login";
+import { Register } from "../register/register";
 
 export function NotLogged() {
   const [isInLogin, setIsInLogin] = useState(false);
