@@ -15,6 +15,7 @@ export function LoggedAccount() {
   useEffect(() => {
     reservationGetUser(users.extraInfo.token!);
     userReadId(users.extraInfo.token!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
