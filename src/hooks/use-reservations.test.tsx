@@ -38,9 +38,15 @@ describe("Given the useReservations", () => {
 
       return (
         <>
-          <button onClick={() => reservationCreate(mockPayload)}>create</button>
-          <button onClick={() => reservationDelete("123")}>delete</button>
-          <button onClick={() => reservationGetUser("12345")}>getUser</button>
+          <button onClick={() => reservationCreate(mockPayload, "tokenTest")}>
+            create
+          </button>
+          <button onClick={() => reservationDelete("1", "tokenTest")}>
+            delete
+          </button>
+          <button onClick={() => reservationGetUser("tokenTest")}>
+            getUser
+          </button>
           <button onClick={() => reservationGetFilterMonth("2023-4", "12345")}>
             monthFilter
           </button>
@@ -94,7 +100,9 @@ describe("Given the useReservations", () => {
 
         return (
           <>
-            <button onClick={() => reservationDelete("123")}>delete</button>
+            <button onClick={() => reservationDelete("123", "tokenTest")}>
+              delete
+            </button>
           </>
         );
       };

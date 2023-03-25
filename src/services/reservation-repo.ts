@@ -14,7 +14,8 @@ export class ReservationsRepo
   }
 
   async create(
-    reservationInfo: Partial<ReservationStructure>
+    reservationInfo: Partial<ReservationStructure>,
+    token: string
   ): Promise<ServerTypeReservation> {
     const url = this.url + "/create";
 
@@ -22,7 +23,7 @@ export class ReservationsRepo
       method: "POST",
       body: JSON.stringify(reservationInfo),
       headers: {
-        // PONER TOKEN
+        Authorization: "Bearer " + token,
         "Content-type": "application/json",
       },
     });
@@ -34,14 +35,13 @@ export class ReservationsRepo
     return data;
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string, token: string): Promise<void> {
     const url = this.url + "/delete/" + id;
 
     const resp = await fetch(url, {
       method: "DELETE",
       headers: {
-        // PONER TOKEN "Content-type": "application/json",
-        // Temp Authorization: 'Bearer ' + token,
+        Authorization: "Bearer " + token,
       },
     });
     if (!resp.ok)
@@ -62,9 +62,14 @@ export class ReservationsRepo
     return data;
   }
 
-  async getByUser(userId: string): Promise<ServerTypeReservation> {
-    const url = this.url + "/user/" + userId;
-    const resp = await fetch(url);
+  async getByUser(token: string): Promise<ServerTypeReservation> {
+    const url = this.url + "/user/";
+    const resp = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
 
     if (!resp.ok)
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);

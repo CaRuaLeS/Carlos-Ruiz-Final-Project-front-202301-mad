@@ -2,12 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserStructure } from "../model/user";
 
 export type State = {
-  userLogged: UserStructure;
+  extraInfo: Partial<UserStructure>;
+  userLogged: Partial<UserStructure>;
   users: UserStructure[];
 };
 
 const initialState: State = {
-  userLogged: {} as UserStructure,
+  extraInfo: {
+    token: localStorage.getItem("token"),
+  },
+  userLogged: {},
   users: [],
 };
 
@@ -19,11 +23,23 @@ export const userSlice = createSlice({
       state.users = [...state.users, action.payload];
     },
     login(state, action: PayloadAction<UserStructure>) {
+      localStorage.setItem("token", action.payload.token!);
+      state.extraInfo = action.payload;
+    },
+    logout(state) {
+      localStorage.removeItem("token");
+      state.extraInfo.token = null;
+    },
+    updateUser(state, action: PayloadAction<UserStructure>) {
+      state.userLogged = { ...state.userLogged, ...action.payload };
+    },
+    loadUser(state, action: PayloadAction<UserStructure>) {
       state.userLogged = action.payload;
     },
   },
 });
 
-export const { register, login } = userSlice.actions;
+export const { register, login, logout, updateUser, loadUser } =
+  userSlice.actions;
 
 export const userReducer = userSlice.reducer;

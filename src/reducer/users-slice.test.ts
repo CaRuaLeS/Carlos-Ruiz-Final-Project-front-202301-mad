@@ -11,6 +11,7 @@ const mockUser = {
   password: mockPasswd,
 };
 const mockInitialState: State = {
+  extraInfo: {},
   userLogged: {} as UserStructure,
   users: [],
 };
@@ -27,12 +28,58 @@ describe("Given the userSlice", () => {
     });
   });
   describe("When the method LOGIN is called", () => {
+    const mockExtra = {
+      token: "12345",
+    } as unknown as UserStructure;
     test("Then it should return in element.userLogged the mock user as an object", () => {
-      const mockRegisterAction: PayloadAction<UserStructure> = {
+      const mockLoginAction: PayloadAction<UserStructure> = {
         type: "user/login",
+        payload: mockExtra,
+      };
+      const element = userReducer(mockInitialState, mockLoginAction);
+      expect(element.extraInfo).toBe(mockExtra);
+    });
+  });
+  describe("When the method LOGOUT is called", () => {
+    test("Then it should return the state undefined", () => {
+      const mockLogout = {
+        type: "user/logout",
+      };
+      const element = userReducer(mockInitialState, mockLogout);
+      expect(element.userLogged.token).toBe(undefined);
+    });
+  });
+  describe("When the method UPDATEUSER is called", () => {
+    const mockUpdateInitialState: State = {
+      extraInfo: {},
+      userLogged: {
+        username: "foo",
+        avatar: "12345",
+      } as UserStructure,
+      users: [],
+    };
+    const mockUpdate = {
+      username: "pepe",
+    } as UserStructure;
+    test("Then it should return the state undefined", () => {
+      const mockLoadUser: PayloadAction<UserStructure> = {
+        type: "user/updateUser",
+        payload: mockUpdate,
+      };
+      const element = userReducer(mockUpdateInitialState, mockLoadUser);
+      expect(element.userLogged).toStrictEqual({
+        username: "pepe",
+        avatar: "12345",
+      });
+    });
+  });
+  describe("When the method LOADUSER is called", () => {
+    test("Then it should return the state undefined", () => {
+      const mockLoadUser: PayloadAction<UserStructure> = {
+        type: "user/loadUser",
         payload: mockUser,
       };
-      const element = userReducer(mockInitialState, mockRegisterAction);
+      const element = userReducer(mockInitialState, mockLoadUser);
       expect(element.userLogged).toBe(mockUser);
     });
   });

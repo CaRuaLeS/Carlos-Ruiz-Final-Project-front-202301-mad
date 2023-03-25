@@ -24,6 +24,25 @@ describe("Given the users repo", () => {
       await expect(result).rejects.toThrow();
     });
   });
+
+  describe("when we call the readId function", () => {
+    test("then if the fetch is OK it should return the data", async () => {
+      const mockValue = { id: "2" };
+
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue(mockValue),
+      });
+      const result = await repo.readId("test token");
+      expect(result).toEqual(mockValue);
+    });
+    test("then if the fetch is NOT OK it throw error", async () => {
+      global.fetch = jest.fn().mockResolvedValue("Error test");
+      const result = repo.readId("testtoken");
+      await expect(result).rejects.toThrow();
+    });
+  });
+
   describe("when we call the update function", () => {
     test("then if the fetch is OK it should return the data", async () => {
       const mockValue = { id: "2" };

@@ -7,4 +7,5 @@ export interface RepoUser<T> {
     urlPath: string,
     token: string
   ): Promise<T>;
+  readId(token: string): Promise<T>;
 }

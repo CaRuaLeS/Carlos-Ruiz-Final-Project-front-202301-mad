@@ -1,20 +1,23 @@
-import { useState } from "react";
-import { LogIn } from "../login/login";
-import { Register } from "../register/register";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../reducer/users-slice";
+import { AppDispatch, RootState } from "../../store/store";
+import { LoggedAccount } from "../profile-logged/logged";
+import NotLogged from "../profile-not-logged/not-logged";
 
 export function Profile() {
-  const [isInLogin, setIsInLogin] = useState(false);
+  const users = useSelector((state: RootState) => state.users);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handlerChange = (condition: boolean) => {
-    setIsInLogin(condition);
-  };
+  const handlerLogout = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
 
   return (
     <>
       <h2>Profile</h2>
-      <button onClick={() => handlerChange(false)}>Register</button>
-      <button onClick={() => handlerChange(true)}>Login</button>
-      {isInLogin ? <LogIn></LogIn> : <Register></Register>}
+      {users.extraInfo.token ? <LoggedAccount /> : <NotLogged />}
+      <button onClick={handlerLogout}>LogOut</button>
     </>
   );
 }

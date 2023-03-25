@@ -1,3 +1,7 @@
+import { useSelector } from "react-redux";
+import { useReservations } from "../../hooks/use-reservations";
+import { ReservationsRepo } from "../../services/reservation-repo";
+import { RootState } from "../../store/store";
 import { ReserveInfo } from "../calendar/calendar";
 
 interface reservationCalendar {
@@ -5,23 +9,22 @@ interface reservationCalendar {
 }
 
 export function CalendarReserve({ reservation }: reservationCalendar) {
-  // TEMP
-  // const repoReservations = new ReservationsRepo();
-  // // TEMP
-  // const { reservationCreate } = useReservations(repoReservations);
+  const users = useSelector((state: RootState) => state.users);
 
-  // TEMP
-  // const reserve = {
-  //   reserveDate: reservation.date,
-  //   escaperoom: reservation.escaperoom,
-  //   user: reservation.user,
-  // };
+  const repoReservations = new ReservationsRepo();
+  const { reservationCreate } = useReservations(repoReservations);
+
+  const reserve = {
+    reserveDate: reservation.date,
+    escaperoom: reservation.escaperoom,
+    user: reservation.user,
+  };
 
   return (
     <>
       <button
         onClick={() => {
-          //reservationCreate(reserve)
+          reservationCreate(reserve, users.extraInfo.token!);
           console.log(reservation);
         }}
       >

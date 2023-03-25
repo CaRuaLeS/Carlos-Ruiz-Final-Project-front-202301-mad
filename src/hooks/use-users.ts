@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { UserStructure } from "../model/user";
 import { UsersRepo } from "../services/user-repo";
 import { AppDispatch, RootState } from "../store/store";
-import { register, login } from "../reducer/users-slice";
+import { register, login, updateUser, loadUser } from "../reducer/users-slice";
 import { newImage } from "../firebase/firebase-user";
 
 export function useUsers(repo: UsersRepo) {
@@ -29,9 +29,30 @@ export function useUsers(repo: UsersRepo) {
     }
   };
 
+  const userUpdate = async (info: Partial<UserStructure>, token: string) => {
+    try {
+      const data = await repo.update(info, "/profile", token);
+
+      dispatch(updateUser(data.results[0]));
+    } catch (error) {
+      console.error((error as Error).message);
+    }
+  };
+
+  const userReadId = async (token: string) => {
+    try {
+      const data = await repo.readId(token);
+      dispatch(loadUser(data.results[0]));
+    } catch (error) {
+      console.error((error as Error).message);
+    }
+  };
+
   return {
     users,
     userRegister,
     userLogin,
+    userUpdate,
+    userReadId,
   };
 }
