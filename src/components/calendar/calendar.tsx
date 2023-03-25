@@ -80,8 +80,6 @@ export function Calendar({ monthOffset, roomId }: Props) {
   useEffect(() => {
     reservationGetFilterMonth(yearMonth, roomId);
     setReservation({ ...reservation, escaperoom: roomId, user: "12345" });
-    console.log(roomId);
-    console.log(reservation);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     reservationGetFilterMonth,
