@@ -7,8 +7,6 @@ import { CalendarWeek } from "./calendar-week";
 jest.mock("../../hooks/use-reservations");
 
 describe("Given the calendar week component", () => {
-  const setState = jest.fn();
-
   beforeEach(async () => {
     (useReservations as jest.Mock).mockReturnValue({
       reservations: {
