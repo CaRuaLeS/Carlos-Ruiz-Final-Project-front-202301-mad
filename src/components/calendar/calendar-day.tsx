@@ -1,20 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
+import { updateActive, updateDate } from "../../reducer/calendar-slice";
 import { ReservationsRepo } from "../../services/reservation-repo";
-import { ReserveInfo } from "./calendar";
+import { AppDispatch } from "../../store/store";
 
 interface CalendarDayProps {
   day: number | string;
   lastOfMonth: Date;
-  reserveSet: React.Dispatch<React.SetStateAction<Partial<ReserveInfo>>>;
 }
 
-export function CalendarDay({
-  day,
-  lastOfMonth,
-  reserveSet,
-}: CalendarDayProps) {
-  if (day < 1) day = "";
-  if (day > lastOfMonth.getDate()) day = "";
+export function CalendarDay({ day, lastOfMonth }: CalendarDayProps) {
+  const dispatch = useDispatch<AppDispatch>();
 
   const repoReservations = new ReservationsRepo();
   const { reservations } = useReservations(repoReservations);
@@ -24,15 +20,23 @@ export function CalendarDay({
     return splitDate[2];
   });
 
+  if (day < 1) day = "";
+  if (day > lastOfMonth.getDate()) day = "";
+
   const yearMonthDate = `${lastOfMonth.getFullYear()}-${
     lastOfMonth.getMonth() + 1
   }-${day}`;
+
+  const handlerDay = () => {
+    dispatch(updateDate(yearMonthDate));
+    dispatch(updateActive(true));
+  };
 
   return (
     <td>
       <button
         disabled={numberMonth.includes(day.toString())}
-        onClick={() => reserveSet({ date: yearMonthDate, active: true })}
+        onClick={() => handlerDay()}
       >
         {day}
       </button>
