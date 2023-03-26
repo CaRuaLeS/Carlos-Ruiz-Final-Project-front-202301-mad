@@ -49,7 +49,7 @@ describe("Given the reservations repo", () => {
 
       goodFetch(mockValue);
       const result = await repo.delete("2", "tokenTest");
-      expect(result).toEqual({});
+      expect(result).toEqual(undefined);
     });
     test("the if fetch is NOT OK it throws", async () => {
       badFetch();

@@ -1,9 +1,8 @@
 /* eslint-disable testing-library/no-render-in-setup */
 /* eslint-disable testing-library/no-unnecessary-act */
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import { Provider, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
-import { store } from "../../store/store";
 import { ProfileCard } from "./profile-card";
 
 jest.mock("react-redux", () => ({
