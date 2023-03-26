@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
 import { updateActive, updateDate } from "../../reducer/calendar-slice";
 import { ReservationsRepo } from "../../services/reservation-repo";
