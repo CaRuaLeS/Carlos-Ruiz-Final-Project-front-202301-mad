@@ -1,13 +1,18 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
+import { store } from "../../store/store";
 import { CalendarDay } from "./calendar-day";
 
 jest.mock("../../hooks/use-reservations");
 
-const setState = jest.fn();
-const groupMockElements = async (mockStateDate: string, mockDay: number) => {
+const groupMockElements = async (
+  mockStateDate: string,
+  mockDay: number,
+  lastmonth: string
+) => {
   (useReservations as jest.Mock).mockReturnValue({
     reservations: {
       reservations: [{ reserveDate: mockStateDate }],
@@ -16,11 +21,9 @@ const groupMockElements = async (mockStateDate: string, mockDay: number) => {
 
   await act(async () => {
     render(
-      <CalendarDay
-        day={mockDay}
-        lastOfMonth={new Date(2023 - 3 - 31)}
-        reserveSet={setState}
-      />
+      <Provider store={store}>
+        <CalendarDay day={mockDay} lastOfMonth={new Date(lastmonth)} />
+      </Provider>
     );
   });
 };
@@ -28,7 +31,7 @@ const groupMockElements = async (mockStateDate: string, mockDay: number) => {
 describe("Given the CalendarDay component", () => {
   describe("when the day is equal to the reserveDate", () => {
     beforeEach(async () => {
-      groupMockElements("2023-3-1", 1);
+      groupMockElements("2023-3-1", 1, "2023-3-31");
     });
     test("then the button should be disabled", () => {
       const element = screen.getByRole("button");
@@ -37,17 +40,17 @@ describe("Given the CalendarDay component", () => {
   });
   describe("when the day is not reserve and the button is pressed", () => {
     beforeEach(async () => {
-      groupMockElements("2023-3-1", 0);
+      groupMockElements("2030-3-1", 30, "2025-3-31");
     });
-    test("then it should call the reserveSet(setState)", async () => {
+    test("then it should call the handlerDay", async () => {
       const element = screen.getByRole("button");
       await fireEvent.click(element);
-      expect(setState).toHaveBeenCalled();
+      expect(element).toBeInTheDocument();
     });
   });
   describe("when the day set is less than 1", () => {
     beforeEach(async () => {
-      groupMockElements("2023-3-1", 0);
+      groupMockElements("2023-3-1", 0, "2023-3-31");
     });
     test("then it should display nothing", async () => {
       const element = screen.getByRole("button");
@@ -56,11 +59,20 @@ describe("Given the CalendarDay component", () => {
   });
   describe("when the day set is more than the last day of the month", () => {
     beforeEach(async () => {
-      groupMockElements("2023-3-1", 32);
+      groupMockElements("2023-3-1", 32, "2023-3-31");
     });
     test("then it should display nothing", async () => {
       const element = screen.getByRole("button");
       expect(element).toHaveTextContent("");
+    });
+  });
+  describe("when the day is a normal day without reserve", () => {
+    beforeEach(async () => {
+      groupMockElements("2025-7-15", 30, "2025-3-31");
+    });
+    test("then it should display the day", async () => {
+      const element = screen.getByRole("button");
+      expect(element).toHaveTextContent("30");
     });
   });
 });

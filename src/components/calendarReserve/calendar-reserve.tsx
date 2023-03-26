@@ -1,23 +1,22 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
+import { updateActive } from "../../reducer/calendar-slice";
 import { ReservationsRepo } from "../../services/reservation-repo";
-import { RootState } from "../../store/store";
-import { ReserveInfo } from "../calendar/calendar";
+import { AppDispatch, RootState } from "../../store/store";
 
-interface reservationCalendar {
-  reservation: ReserveInfo;
-}
+export function CalendarReserve() {
+  const dispatch = useDispatch<AppDispatch>();
 
-export function CalendarReserve({ reservation }: reservationCalendar) {
   const users = useSelector((state: RootState) => state.users);
+  const calendarReserve = useSelector((state: RootState) => state.calendar);
 
   const repoReservations = new ReservationsRepo();
   const { reservationCreate } = useReservations(repoReservations);
 
   const reserve = {
-    reserveDate: reservation.date,
-    escaperoom: reservation.escaperoom,
-    user: reservation.user,
+    reserveDate: calendarReserve.date,
+    escaperoom: calendarReserve.escaperoom,
+    user: calendarReserve.user,
   };
 
   return (
@@ -25,7 +24,7 @@ export function CalendarReserve({ reservation }: reservationCalendar) {
       <button
         onClick={() => {
           reservationCreate(reserve, users.extraInfo.token!);
-          console.log(reservation);
+          dispatch(updateActive(false));
         }}
       >
         Reservar

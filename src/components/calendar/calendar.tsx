@@ -1,27 +1,23 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
+import { updateEscaperoom } from "../../reducer/calendar-slice";
 import { ReservationsRepo } from "../../services/reservation-repo";
+import { AppDispatch, RootState } from "../../store/store";
 import { CalendarReserve } from "../calendarReserve/calendar-reserve";
 import { CalendarWeek } from "./calendar-week";
 
-export type ReserveInfo = {
-  active: boolean;
-  date: string;
-  escaperoom: string;
-  user: string;
-};
 interface Props {
   monthOffset: number;
   roomId: string;
 }
 
 export function Calendar({ monthOffset, roomId }: Props) {
-  const [reservation, setReservation] = useState({
-    active: false,
-    date: "",
-    escaperoom: "",
-    user: "",
-  } as ReserveInfo);
+  const dispatch = useDispatch<AppDispatch>();
+  const calendarReserve = useSelector((state: RootState) => state.calendar);
+
+  const repoReservations = useMemo(() => new ReservationsRepo(), []);
+  const { reservationGetFilterMonth } = useReservations(repoReservations);
 
   // #region Calendar logic
   const now = new Date();
@@ -43,17 +39,11 @@ export function Calendar({ monthOffset, roomId }: Props) {
   for (let i = 0; i < 6; i++) {
     rows.push(
       <CalendarWeek
-        key={i + 10}
+        key={i + 50}
         week={i}
         lastOfMonth={lastOfMonth}
         offset={offset}
-        reserveSet={
-          setReservation as React.Dispatch<
-            React.SetStateAction<Partial<ReserveInfo>>
-          >
-        }
       />
-      //CalendarWeek(i, offset, lastOfMonth)
     );
   }
   const month = [
@@ -72,21 +62,14 @@ export function Calendar({ monthOffset, roomId }: Props) {
   ];
   // #endregion
 
-  const repoReservations = useMemo(() => new ReservationsRepo(), []);
-  const { reservationGetFilterMonth } = useReservations(repoReservations);
   const yearMonth: string =
     lastOfMonth.getFullYear() + "-" + (firstOfMonth.getMonth() + 1);
 
   useEffect(() => {
     reservationGetFilterMonth(yearMonth, roomId);
-    setReservation({ ...reservation, escaperoom: roomId, user: "12345" });
+    dispatch(updateEscaperoom(roomId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    reservationGetFilterMonth,
-    yearMonth,
-    setReservation,
-    reservation.escaperoom,
-  ]);
+  }, [reservationGetFilterMonth, yearMonth, dispatch]);
 
   return (
     <>
@@ -107,9 +90,7 @@ export function Calendar({ monthOffset, roomId }: Props) {
         </thead>
         <tbody>{rows}</tbody>
       </table>
-      {reservation.active ? (
-        <CalendarReserve reservation={reservation}></CalendarReserve>
-      ) : undefined}
+      {calendarReserve.active ? <CalendarReserve></CalendarReserve> : undefined}
     </>
   );
 }

@@ -15,8 +15,7 @@ const mockInitialState: ReservationsState = {
 };
 
 const mockInitialStateReservations: ReservationsState = {
-  userReservations: [],
-  reservations: [
+  userReservations: [
     {
       id: "123",
       reserveDate: "2023-05-03",
@@ -30,6 +29,7 @@ const mockInitialStateReservations: ReservationsState = {
       escaperoom: "escaperoom id test 1",
     },
   ],
+  reservations: [],
 };
 
 describe("Given the reservationsSlice", () => {
@@ -54,7 +54,7 @@ describe("Given the reservationsSlice", () => {
         mockInitialStateReservations,
         mockDelete
       );
-      expect(element.reservations).toEqual([
+      expect(element.userReservations).toEqual([
         {
           id: "1234",
           reserveDate: "2023-05-05",

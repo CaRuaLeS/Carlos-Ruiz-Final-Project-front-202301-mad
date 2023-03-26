@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { EscaperoomsRepo } from "../../services/escaperoom-repo";
 import { Calendar } from "../calendar/calendar";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { updateActive } from "../../reducer/calendar-slice";
 
 function Details() {
   const { escapeRoom } = useParams();
@@ -11,6 +14,8 @@ function Details() {
 
   const repoEscaperoom = useMemo(() => new EscaperoomsRepo(), []);
   const { escaperooms, escaperoomGetById } = useEscapeRooms(repoEscaperoom);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     escaperoomGetById(roomIdString!);
@@ -20,6 +25,7 @@ function Details() {
 
   function handlerButton(num: number) {
     setMoreNumber(monthNum + num);
+    dispatch(updateActive(false));
   }
 
   return (
