@@ -21,7 +21,8 @@ export const reservationSlice = createSlice({
       state,
       action: PayloadAction<ReservationStructure["id"]>
     ) {
-      state.reservations = [...state.reservations].filter(
+      const currentState = [...state.userReservations];
+      state.userReservations = currentState.filter(
         (item) => item.id !== action.payload
       );
     },
