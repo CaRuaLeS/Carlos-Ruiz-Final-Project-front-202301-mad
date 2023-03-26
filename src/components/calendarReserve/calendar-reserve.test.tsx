@@ -14,7 +14,6 @@ jest.mock("react-redux", () => ({
 describe("Given the CalendarReserve", () => {
   const mockReservationCreate = jest.fn();
   let usersMock;
-  let mockCalendarReserve;
   let mockDispatch = jest.fn();
 
   beforeEach(async () => {
@@ -26,11 +25,6 @@ describe("Given the CalendarReserve", () => {
       extraInfo: {
         token: undefined,
       },
-    };
-    mockCalendarReserve = {
-      date: "123",
-      escaperoom: "escaperoom test",
-      user: "user test",
     };
     (useSelector as jest.Mock).mockReturnValue(usersMock);
     (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
