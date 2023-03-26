@@ -57,7 +57,6 @@ export function useReservations(repo: ReservationsRepo) {
     async (dateYearMonth: string, escaperoomId: string) => {
       try {
         const data = await repo.getFilterMonth(dateYearMonth, escaperoomId);
-        console.log(data);
         dispatch(getMonthReservations(data.results));
       } catch (error) {
         console.error((error as Error).message);
