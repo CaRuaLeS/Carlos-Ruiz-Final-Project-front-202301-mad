@@ -1,14 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ReservationStructure } from "../model/reservation";
 import { calendarReducer, CalendarState } from "./calendar-slice";
-import { reservationReducer, ReservationsState } from "./reservations-slice";
-
-const mockCalendar = {
-  active: false,
-  date: "date test",
-  escaperoom: "room test",
-  user: "user test",
-};
 
 const mockInitialState: CalendarState = {
   active: false,
