@@ -3,13 +3,10 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
-import { updateDate } from "../../reducer/calendar-slice";
 import { store } from "../../store/store";
 import { CalendarDay } from "./calendar-day";
 
 jest.mock("../../hooks/use-reservations");
-
-const handlerDay = jest.fn();
 
 const groupMockElements = async (
   mockStateDate: string,
