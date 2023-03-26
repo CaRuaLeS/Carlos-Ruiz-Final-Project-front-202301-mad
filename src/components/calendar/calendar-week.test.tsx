@@ -22,7 +22,6 @@ describe("Given the calendar week component", () => {
           week={1}
           offset={3}
           lastOfMonth={new Date(2023 - 3 - 31)}
-          reserveSet={setState}
         />
       );
     });
