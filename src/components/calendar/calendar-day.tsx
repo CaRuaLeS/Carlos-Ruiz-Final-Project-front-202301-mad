@@ -23,6 +23,19 @@ export function CalendarDay({ day, lastOfMonth }: CalendarDayProps) {
   if (day < 1) day = "";
   if (day > lastOfMonth.getDate()) day = "";
 
+  const today = new Date();
+
+  const disableCondition = () => {
+    if (
+      day < 1 ||
+      day > lastOfMonth.getDate() ||
+      numberMonth.includes(day.toString()) ||
+      (lastOfMonth.getMonth() === today.getMonth() && day < today.getDate())
+    )
+      return true;
+    return false;
+  };
+
   const yearMonthDate = `${lastOfMonth.getFullYear()}-${
     lastOfMonth.getMonth() + 1
   }-${day}`;
@@ -34,10 +47,7 @@ export function CalendarDay({ day, lastOfMonth }: CalendarDayProps) {
 
   return (
     <td>
-      <button
-        disabled={numberMonth.includes(day.toString())}
-        onClick={() => handlerDay()}
-      >
+      <button disabled={disableCondition()} onClick={() => handlerDay()}>
         {day}
       </button>
     </td>
