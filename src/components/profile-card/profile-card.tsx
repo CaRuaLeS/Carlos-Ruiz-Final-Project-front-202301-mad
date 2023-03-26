@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
 import { ReservationsRepo } from "../../services/reservation-repo";
