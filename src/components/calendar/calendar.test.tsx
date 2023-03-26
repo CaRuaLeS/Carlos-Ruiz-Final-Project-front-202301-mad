@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
 import { act, render, screen } from "@testing-library/react";
-import { useState as useStateMock } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
 import { CalendarReserve } from "../calendarReserve/calendar-reserve";
 import { Calendar } from "./calendar";
@@ -10,30 +10,25 @@ import { CalendarWeek } from "./calendar-week";
 jest.mock("./calendar-week");
 jest.mock("../../hooks/use-reservations");
 jest.mock("../calendarReserve/calendar-reserve");
-
-jest.mock("react", () => ({
-  ...jest.requireActual("react"),
-  useState: jest.fn(),
+jest.mock("react-redux", () => ({
+  useSelector: jest.fn(),
+  useDispatch: jest.fn(),
 }));
 
 describe("Given the Calendar component", () => {
-  const mockSetState = jest.fn();
   const mockReservationGetFilterMonth = jest.fn();
-  const mockReservationState = {
+  let mockDispatch = jest.fn();
+  const mockReservation = {
     active: false,
     date: "",
-    escaperoom: "",
-    user: "",
   };
-
   beforeEach(async () => {
     (useReservations as jest.Mock).mockReturnValue({
       reservationGetFilterMonth: mockReservationGetFilterMonth,
     });
-    (useStateMock as jest.Mock).mockImplementation(() => [
-      mockReservationState,
-      mockSetState,
-    ]);
+    (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
+
+    (useSelector as jest.Mock).mockReturnValue(mockReservation);
 
     await act(async () => {
       render(<Calendar monthOffset={0} roomId={"12345"}></Calendar>);
@@ -51,22 +46,16 @@ describe("Given the Calendar component", () => {
   });
 
   describe("when the CALENDAR component renders", () => {
-    const mockSetState = jest.fn();
-    const mockReservationGetFilterMonth = jest.fn();
-    const mockReservationState = {
-      active: true,
-      date: "",
-      escaperoom: "",
-      user: "",
-    };
     beforeEach(async () => {
       (useReservations as jest.Mock).mockReturnValue({
         reservationGetFilterMonth: mockReservationGetFilterMonth,
       });
-      (useStateMock as jest.Mock).mockImplementation(() => [
-        mockReservationState,
-        mockSetState,
-      ]);
+      const mockReservation = {
+        active: true,
+        date: "",
+      };
+      (useSelector as jest.Mock).mockReturnValue(mockReservation);
+      (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
       render(<Calendar monthOffset={0} roomId={"12345"}></Calendar>);
     });
     test("then it should render the CalendarReserve component", () => {
