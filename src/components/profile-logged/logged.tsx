@@ -26,6 +26,7 @@ export function LoggedAccount() {
           alt={`Profile pic of: ${users.userLogged.username}`}
         ></img>
         <h2>{users.userLogged.username}</h2>
+        <button>Edit</button>
       </section>
       <section className="list">
         <div>list account</div>
