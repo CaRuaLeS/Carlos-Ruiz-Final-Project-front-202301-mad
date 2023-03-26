@@ -3,7 +3,7 @@ import { AppRouter } from "../app-router/app-router";
 import { Footer } from "../footer/footer";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
-import "./app.css";
+import "./app.scss";
 
 export type MenuOption = {
   label: string;

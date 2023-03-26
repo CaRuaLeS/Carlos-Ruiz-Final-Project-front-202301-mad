@@ -1,4 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
+import styles from "./register.module.scss";
+
 import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use-users";
 import { User } from "../../model/user";
@@ -24,24 +26,26 @@ export function Register() {
   };
 
   return (
-    <form onSubmit={handlerSubmit}>
+    <form onSubmit={handlerSubmit} className={styles.container}>
       <label>
-        username
+        USERNAME
         <input type="text" name="text" required />
       </label>
       <label>
-        email
+        EMAIL
         <input type="email" name="email" required />
       </label>
       <label>
-        password
+        PASSWORD
         <input type="password" name="password" role="textbox" required />
       </label>
       <label>
-        avatar
+        AVATAR
         <input type="file" name="image" />
       </label>
-      <button type="submit">Register</button>
+      <button className={styles.submit} type="submit">
+        REGISTER
+      </button>
     </form>
   );
 }

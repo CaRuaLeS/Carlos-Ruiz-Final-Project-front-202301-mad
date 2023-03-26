@@ -1,0 +1,42 @@
+.menu {
+  ul {
+    display: flex;
+    flex-direction: row;
+    margin-right: 1rem;
+    li {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      .text {
+        font-size: 1.5rem;
+        color: aliceblue;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      img {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .menu {
+    ul {
+      margin-right: 0;
+      li {
+        margin-left: 0.4rem;
+        margin-right: 0.4rem;
+        .text {
+          display: none;
+        }
+
+        img {
+          display: inline;
+          height: 2.8rem;
+        }
+      }
+    }
+  }
+}

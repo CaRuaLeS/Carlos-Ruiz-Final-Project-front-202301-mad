@@ -1,3 +1,5 @@
+import styles from "./not-logged.module.scss";
+
 import { useState } from "react";
 import { LogIn } from "../login/login";
 import { Register } from "../register/register";
@@ -6,11 +8,15 @@ export function NotLogged() {
   const [isInLogin, setIsInLogin] = useState(false);
 
   return (
-    <>
-      <button onClick={() => setIsInLogin(false)}>Register</button>
-      <button onClick={() => setIsInLogin(true)}>Login</button>
-      {isInLogin ? <LogIn></LogIn> : <Register></Register>}
-    </>
+    <div className={styles.notlogged}>
+      <div className={styles.buttons}>
+        <button onClick={() => setIsInLogin(false)}>REGISTER</button>
+        <button onClick={() => setIsInLogin(true)}>LOGIN</button>
+      </div>
+      <div className={styles.components}>
+        {isInLogin ? <LogIn></LogIn> : <Register></Register>}
+      </div>
+    </div>
   );
 }
 export default NotLogged;

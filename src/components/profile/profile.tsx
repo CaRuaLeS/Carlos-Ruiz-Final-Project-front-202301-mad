@@ -1,3 +1,5 @@
+import styles from "./profile.module.scss";
+
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../reducer/users-slice";
@@ -15,9 +17,18 @@ export function Profile() {
 
   return (
     <>
-      <h2>Profile</h2>
-      {users.extraInfo.token ? <LoggedAccount /> : <NotLogged />}
-      <button onClick={handlerLogout}>LogOut</button>
+      <div className={styles.container}>
+        {users.extraInfo.token ? (
+          <LoggedAccount />
+        ) : (
+          <div className={styles.notcomp}>
+            <NotLogged />
+          </div>
+        )}
+        <button className={styles.logout} onClick={handlerLogout}>
+          LOG OUT
+        </button>
+      </div>
     </>
   );
 }
