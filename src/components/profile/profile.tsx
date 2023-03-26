@@ -19,7 +19,9 @@ export function Profile() {
     <>
       <div className={styles.container}>
         <div>{users.extraInfo.token ? <LoggedAccount /> : <NotLogged />}</div>
-        <button onClick={handlerLogout}>LOG OUT</button>
+        <button className={styles.logout} onClick={handlerLogout}>
+          LOG OUT
+        </button>
       </div>
     </>
   );

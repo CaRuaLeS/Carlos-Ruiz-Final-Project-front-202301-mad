@@ -1,3 +1,5 @@
+import styles from "./logged.module.scss";
+
 import { useEffect } from "react";
 import { ReservationsRepo } from "../../services/reservation-repo";
 import { useReservations } from "../../hooks/use-reservations";
@@ -20,16 +22,18 @@ export function LoggedAccount() {
 
   return (
     <>
-      <section>
-        <img
-          src={users.userLogged.avatar}
-          alt={`Profile pic of: ${users.userLogged.username}`}
-        ></img>
-        <h2>{users.userLogged.username}</h2>
+      <section className={styles.info}>
+        <div className={styles.content}>
+          <img
+            src={users.userLogged.avatar}
+            alt={`Profile pic of: ${users.userLogged.username}`}
+          ></img>
+          <h2 className={styles.username}>{users.userLogged.username}</h2>
+        </div>
         <button>Edit</button>
       </section>
-      <section className="list">
-        <div>list account</div>
+      <section className={styles.list}>
+        <div className={styles.titlelist}>YOUR RESERVATIONS</div>
         <ul className="list__ul">
           {reservations.userReservations.map((item) => (
             <ProfileCard key={item.id} reserves={item} />
