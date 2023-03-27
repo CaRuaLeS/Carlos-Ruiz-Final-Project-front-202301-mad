@@ -1,4 +1,4 @@
-import "./details.css";
+import styles from "./details.module.scss";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
@@ -30,11 +30,11 @@ function Details() {
 
   return (
     <>
-      <h2 className="details-title">{escaperooms.detailsRoom.name}</h2>
-      <section className="details">
-        <div className="details-info">
+      <h2 className={styles.title}>{escaperooms.detailsRoom.name}</h2>
+      <section className={styles.details}>
+        <div className={styles.detailsInfo}>
           <img
-            className="details-info__image"
+            className={styles.detailsImage}
             src={escaperooms.detailsRoom.images?.[1]}
             alt={`Details ${escaperooms.detailsRoom.name}`}
           />
@@ -43,11 +43,11 @@ function Details() {
             <div>{escaperooms.detailsRoom.theme}</div>
             <div>{escaperooms.detailsRoom.difficulty}</div>
           </div>
-          <p className="details-info__description">
+          <p className={styles.detailsDescription}>
             {escaperooms.detailsRoom.description}
           </p>
         </div>
-        <div className="details-calendar">
+        <div className={styles.calendar}>
           <button onClick={() => handlerButton(-1)} disabled={monthNum <= 0}>
             Prev
           </button>

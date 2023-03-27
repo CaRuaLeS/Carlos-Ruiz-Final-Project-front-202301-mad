@@ -1,3 +1,5 @@
+import styles from "./calendar.module.scss";
+
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
@@ -76,7 +78,7 @@ export function Calendar({ monthOffset, roomId }: Props) {
       <p>
         {month[lastOfMonth.getMonth()]} {lastOfMonth.getFullYear()}
       </p>
-      <table>
+      <table className={styles.calendar}>
         <thead>
           <tr>
             <th>Sun</th>

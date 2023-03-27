@@ -1,0 +1,17 @@
+.calendar {
+  tr {
+    display: flex;
+  }
+  button {
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  :checked + label:before {
+    content: "✓";
+    background-color: rgb(160, 43, 43);
+  }
+  .selected {
+    background-color: rgb(119, 119, 220);
+  }
+}
