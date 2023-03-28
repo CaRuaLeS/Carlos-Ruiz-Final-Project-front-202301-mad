@@ -9,22 +9,8 @@ import { EscaperoomState } from "../../reducer/escaperooms-slice";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { Calendar } from "../calendar/calendar";
 
-// Trying to mock a component IN PROCESS
-// interface mockProp {
-//   mockMonthOffset: number;
-// }
-// const comp =
-//   () =>
-//   ({ mockMonthOffset }: mockProp) => {
-//     return <div data-testid="calendar">{mockMonthOffset}</div>;
-//   };
-
 jest.mock("../../hooks/use-escaperooms");
-jest.mock(
-  "../calendar/calendar"
-  // Part of the mock component
-  //, () => comp
-);
+jest.mock("../calendar/calendar");
 
 describe("Given Details component", () => {
   beforeEach(async () => {

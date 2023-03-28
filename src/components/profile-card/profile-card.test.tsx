@@ -1,22 +1,15 @@
 /* eslint-disable testing-library/no-render-in-setup */
 /* eslint-disable testing-library/no-unnecessary-act */
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import { useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
+import { store } from "../../store/store";
 import { ProfileCard } from "./profile-card";
 
-jest.mock("react-redux", () => ({
-  useSelector: jest.fn(),
-}));
 jest.mock("../../hooks/use-reservations");
 
 const mockReservationDelete = jest.fn();
 
-const mockToken = {
-  extraInfo: {
-    token: "tokenTest",
-  },
-};
 const mockReserve = {
   name: "name test",
   escaperoom: {
@@ -26,14 +19,16 @@ const mockReserve = {
 
 describe("Given the card component", () => {
   beforeEach(async () => {
-    (useSelector as jest.Mock).mockReturnValue(mockToken);
-
     (useReservations as jest.Mock).mockReturnValue({
       reservationDelete: mockReservationDelete,
     });
 
     await act(async () => {
-      render(<ProfileCard reserves={mockReserve}></ProfileCard>);
+      render(
+        <Provider store={store}>
+          <ProfileCard reserves={mockReserve}></ProfileCard>
+        </Provider>
+      );
     });
   });
 
