@@ -1,0 +1,21 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: antiquewhite;
+  border-radius: 0.5rem;
+  .name {
+    margin-bottom: 0.5rem;
+  }
+  .date {
+    margin-bottom: 0.5rem;
+  }
+  .button {
+    margin-bottom: 0.5rem;
+  }
+}

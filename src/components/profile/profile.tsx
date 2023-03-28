@@ -18,14 +18,20 @@ export function Profile() {
   return (
     <>
       <div className={styles.container}>
-        {users.extraInfo.token ? (
-          <LoggedAccount />
-        ) : (
-          <div className={styles.notcomp}>
-            <NotLogged />
-          </div>
-        )}
-        <button className={styles.logout} onClick={handlerLogout}>
+        <div className={styles.links}>
+          {users.extraInfo.token ? (
+            <LoggedAccount />
+          ) : (
+            <div className={styles.notcomp}>
+              <NotLogged />
+            </div>
+          )}
+        </div>
+        <button
+          className={styles.logout}
+          style={{ display: users.extraInfo.token ? "block" : "none" }}
+          onClick={handlerLogout}
+        >
           LOG OUT
         </button>
       </div>
