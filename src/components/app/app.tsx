@@ -1,9 +1,9 @@
-import React from "react";
+import styles from "./app.module.scss";
+
 import { AppRouter } from "../app-router/app-router";
 import { Footer } from "../footer/footer";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
-import "./app.scss";
 
 export type MenuOption = {
   label: string;
@@ -21,7 +21,9 @@ export function App() {
       <Header>
         <Menu options={menuOptions}></Menu>
       </Header>
-      <AppRouter menuOptions={menuOptions}></AppRouter>
+      <div className={styles.container}>
+        <AppRouter menuOptions={menuOptions}></AppRouter>
+      </div>
       <Footer></Footer>
     </>
   );
