@@ -44,16 +44,18 @@ describe("Given the Calendar component", () => {
         reservationGetFilterMonth: mockReservationGetFilterMonth,
       });
     });
-    test("then it should render the CalendarReserve component", () => {
+    test("then it should render the CalendarReserve component", async () => {
       store.dispatch({
         type: "calendar/updateActive",
         payload: { active: true },
       });
-      render(
-        <Provider store={store}>
-          <Calendar monthOffset={0} roomId={"12345"}></Calendar>
-        </Provider>
-      );
+      await act(async () => {
+        render(
+          <Provider store={store}>
+            <Calendar monthOffset={0} roomId={"12345"}></Calendar>
+          </Provider>
+        );
+      });
       expect(CalendarReserve).toHaveBeenCalled();
     });
   });
