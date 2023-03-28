@@ -10,15 +10,14 @@ export function Home() {
 
   return (
     <section className={styles.home}>
-      <h2 className="home__title">Home</h2>
       <select
+        className={styles.select}
         onChange={async (element) => {
           const selectedTheme = element.target.value;
           selectedTheme === "All"
             ? escaperoomGetAll()
             : escaperoomGetByTheme(selectedTheme);
         }}
-        className={styles.select}
       >
         <option value="All" placeholder="Select a theme">
           All
