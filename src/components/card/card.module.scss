@@ -1,16 +1,20 @@
-.room-card {
+.card {
   text-align: center;
   display: flex;
   flex-direction: column;
 }
 
-.room-card__image {
+.image {
   max-width: 80%;
   height: auto;
   border-radius: 0.5rem;
 }
 
-.room-card__details {
+.name {
+  text-decoration: none;
+}
+
+.details {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
