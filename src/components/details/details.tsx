@@ -32,26 +32,46 @@ function Details() {
     <>
       <h2 className={styles.title}>{escaperooms.detailsRoom.name}</h2>
       <section className={styles.details}>
-        <div className={styles.detailsInfo}>
+        <div className={styles.info}>
           <img
-            className={styles.detailsImage}
+            className={styles.image}
             src={escaperooms.detailsRoom.images?.[1]}
             alt={`Details ${escaperooms.detailsRoom.name}`}
           />
-          <div className="details-info__specs">
-            <div>{escaperooms.detailsRoom.players}</div>
-            <div>{escaperooms.detailsRoom.theme}</div>
-            <div>{escaperooms.detailsRoom.difficulty}</div>
+          <div className={styles.specs}>
+            <div className={styles.content}>
+              <img
+                src={process.env.PUBLIC_URL + "/images/group.svg"}
+                alt="number of player"
+              />
+              {escaperooms.detailsRoom.players}
+            </div>
+            <div className={styles.content}>
+              <img
+                src={process.env.PUBLIC_URL + "/images/theme.svg"}
+                alt="theme icon"
+              />
+              {escaperooms.detailsRoom.theme}
+            </div>
+            <div className={styles.content}>
+              <img
+                src={process.env.PUBLIC_URL + "/images/difficulty.svg"}
+                alt="difficult icon"
+              />
+              {escaperooms.detailsRoom.difficulty}
+            </div>
           </div>
-          <p className={styles.detailsDescription}>
+          <p className={styles.description}>
             {escaperooms.detailsRoom.description}
           </p>
         </div>
         <div className={styles.calendar}>
-          <button onClick={() => handlerButton(-1)} disabled={monthNum <= 0}>
-            Prev
-          </button>
-          <button onClick={() => handlerButton(1)}>Next</button>
+          <div className={styles.buttons}>
+            <button onClick={() => handlerButton(-1)} disabled={monthNum <= 0}>
+              &lt;
+            </button>
+            <button onClick={() => handlerButton(1)}>&gt;</button>
+          </div>
           <Calendar
             key={1}
             monthOffset={monthNum}
