@@ -1,5 +1,4 @@
 .info {
-  margin-top: 2rem;
   margin-left: 2rem;
   margin-bottom: 2rem;
   display: flex;
@@ -31,6 +30,18 @@
   .titlelist {
     margin-bottom: 1rem;
     font-weight: bold;
+  }
+  .ul {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(0, min(100%/1, max(20rem, 80%/3)))
+    );
+    padding: 0;
+    justify-self: center;
+    justify-content: center;
+    row-gap: 2rem;
   }
 }
 

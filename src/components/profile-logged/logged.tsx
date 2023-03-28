@@ -34,7 +34,7 @@ export function LoggedAccount() {
       </section>
       <section className={styles.list}>
         <div className={styles.titlelist}>YOUR RESERVATIONS</div>
-        <ul className="list__ul">
+        <ul className={styles.ul}>
           {reservations.userReservations.map((item) => (
             <ProfileCard key={item.id} reserves={item} />
           ))}
