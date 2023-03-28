@@ -23,7 +23,7 @@ export const escaperoomSlice = createSlice({
     getByThemeEscaperooms(state, action: PayloadAction<EscapeRoomStructure[]>) {
       state.escapeRooms = action.payload;
     },
-    // Falta añadir si se selecciona 1 sola escaperoom
+    // Add new escaperoom functionality
   },
 });
 
