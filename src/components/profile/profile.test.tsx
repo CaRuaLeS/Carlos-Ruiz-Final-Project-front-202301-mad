@@ -53,6 +53,17 @@ describe("Given the profile component", () => {
     });
   });
   describe("when the logut button is clicked", () => {
+    beforeEach(() => {
+      handlerLogout = jest.fn();
+      (useDispatch as jest.Mock).mockReturnValue(handlerLogout);
+
+      usersMock = {
+        extraInfo: {
+          token: "123456",
+        },
+      };
+      (useSelector as jest.Mock).mockReturnValue(usersMock);
+    });
     test("then logout handler should be called", () => {
       render(<Profile />);
       const element = screen.getByRole("button");

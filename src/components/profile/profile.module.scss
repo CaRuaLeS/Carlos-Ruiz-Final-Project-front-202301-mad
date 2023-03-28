@@ -1,6 +1,11 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
+
+  .links {
+    min-height: calc(100vh - 21rem);
+  }
 
   .notcomp {
     display: flex;
@@ -11,8 +16,14 @@
     display: flex;
     text-align: center;
     align-items: center;
-    width: 5rem;
+    width: 7rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    margin-left: 2rem;
+    border: none;
+    font-family: "McLaren", cursive;
+    height: 3rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
   }
 }

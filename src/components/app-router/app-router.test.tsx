@@ -24,9 +24,7 @@ describe("Given the app router component", () => {
   describe("when the route is HOME", () => {
     test("then it should go to /home and render it", async () => {
       await waitFor(async () => mockRouterFunctions(0));
-      const element = await screen.findByRole("heading", {
-        name: "Home",
-      });
+      const element = await screen.findByText(/All/i);
       expect(element).toBeInTheDocument();
     });
   });

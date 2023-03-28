@@ -1,4 +1,5 @@
-import "./card.css";
+import styles from "./card.module.scss";
+
 import { Link } from "react-router-dom";
 import { EscapeRoomStructure } from "../../model/escaperoom";
 
@@ -8,19 +9,27 @@ type RoomProps = {
 
 export function Card({ room }: RoomProps) {
   return (
-    <li className="room-card">
-      <Link to={`/details/${room.id}`}>
+    <li className={styles.card}>
+      <Link to={`/details/${room.id}`} className={styles.link}>
         <img
-          className="room-card__image"
+          className={styles.image}
           src={room.images![0]}
           alt={`${room.name} card`}
         ></img>
-        <div className="room-card__name">{room.name}</div>
+        <div className={styles.name}>{room.name}</div>
       </Link>
-      <div className="room-card__details">
-        <div>{room.players}</div>
-        <div>Theme: {room.theme}</div>
-        <div>Difficulty: {room.difficulty}</div>
+      <div className={styles.details}>
+        <div className={styles.content}>
+          <img src="./images/group.svg" alt="number of player" />
+          {room.players}
+        </div>
+        <div className={styles.content}>
+          <img src="./images/theme.svg" alt="theme" /> {room.theme}
+        </div>
+        <div className={styles.content}>
+          <img src="./images/difficulty.svg" alt="difficulty" />
+          {room.difficulty}
+        </div>
       </div>
     </li>
   );

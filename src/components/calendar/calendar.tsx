@@ -75,9 +75,10 @@ export function Calendar({ monthOffset, roomId }: Props) {
 
   return (
     <>
-      <p>
-        {month[lastOfMonth.getMonth()]} {lastOfMonth.getFullYear()}
-      </p>
+      <div className={styles.monthYear}>
+        <p>{month[lastOfMonth.getMonth()]}</p>
+        <p>{lastOfMonth.getFullYear()}</p>
+      </div>
       <table className={styles.calendar}>
         <thead>
           <tr>

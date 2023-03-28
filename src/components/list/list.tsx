@@ -1,4 +1,4 @@
-import "./list.css";
+import styles from "./list.module.scss";
 import { useEffect, useMemo } from "react";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { EscapeRoomStructure } from "../../model/escaperoom";
@@ -15,9 +15,8 @@ export function List() {
   }, [escaperoomGetAll]);
 
   return (
-    <section className="list">
-      <div>list</div>
-      <ul className="list__ul">
+    <section className={styles.list}>
+      <ul className={styles.ul}>
         {
           /* { Map with each card } */
           escaperooms.escapeRooms.map((item: Partial<EscapeRoomStructure>) => (

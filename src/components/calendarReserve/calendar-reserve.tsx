@@ -1,3 +1,5 @@
+import styles from "../calendar/calendar.module.scss";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
 import { updateActive } from "../../reducer/calendar-slice";
@@ -22,6 +24,7 @@ export function CalendarReserve() {
   return (
     <>
       <button
+        className={styles.reserve}
         onClick={() => {
           reservationCreate(reserve, users.extraInfo.token!);
           dispatch(updateActive(false));

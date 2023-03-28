@@ -20,14 +20,20 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
           >
-            <img src="./images/icon-linkedin.svg" alt="Linkedin profile" />
+            <img
+              src={process.env.PUBLIC_URL + "./images/icon-linkedin.svg"}
+              alt="Linkedin profile"
+            />
           </a>
           <a
             href="https://github.com/CaRuaLeS"
             target="_blank"
             rel="noreferrer"
           >
-            <img src="./images/icon-github.svg" alt="GitHub profile" />
+            <img
+              src={process.env.PUBLIC_URL + "./images/icon-github.svg"}
+              alt="GitHub profile"
+            />
           </a>
         </div>
       </section>

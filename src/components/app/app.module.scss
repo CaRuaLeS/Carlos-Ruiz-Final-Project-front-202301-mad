@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+.container {
+  min-height: calc(100vh - 210px - 2rem);
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    min-height: calc(100vh - 160px - 2rem);
+  }
+}

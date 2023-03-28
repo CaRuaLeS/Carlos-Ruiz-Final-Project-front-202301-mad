@@ -1,3 +1,5 @@
+import styles from "./profile-card.module.scss";
+
 import { useSelector } from "react-redux";
 import { useReservations } from "../../hooks/use-reservations";
 import { ReservationsRepo } from "../../services/reservation-repo";
@@ -18,9 +20,9 @@ export function ProfileCard({ reserves }: ProfileProps) {
   };
 
   return (
-    <li className="reserves-card">
-      <div>{reserves.escaperoom.name}</div>
-      <div>{reserves.reserveDate}</div>
+    <li className={styles.card}>
+      <div className={styles.name}>{reserves.escaperoom.name}</div>
+      <div className={styles.date}>{reserves.reserveDate}</div>
       <button onClick={handleDelete}>Delete</button>
     </li>
   );

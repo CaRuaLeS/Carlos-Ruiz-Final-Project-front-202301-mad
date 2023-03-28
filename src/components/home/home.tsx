@@ -1,4 +1,4 @@
-import "./home.css";
+import styles from "./home.module.scss";
 import { useMemo } from "react";
 import { useEscapeRooms } from "../../hooks/use-escaperooms";
 import { EscaperoomsRepo } from "../../services/escaperoom-repo";
@@ -9,16 +9,15 @@ export function Home() {
   const { escaperoomGetAll, escaperoomGetByTheme } = useEscapeRooms(repo);
 
   return (
-    <section className="home">
-      <h2 className="home__title">Home</h2>
+    <section className={styles.home}>
       <select
+        className={styles.select}
         onChange={async (element) => {
           const selectedTheme = element.target.value;
           selectedTheme === "All"
             ? escaperoomGetAll()
             : escaperoomGetByTheme(selectedTheme);
         }}
-        className="home__select"
       >
         <option value="All" placeholder="Select a theme">
           All
