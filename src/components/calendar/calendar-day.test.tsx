@@ -77,7 +77,6 @@ describe("Given the CalendarDay component", () => {
   });
   describe("when it sets today date", () => {
     const today = new Date();
-    today.toDateString();
     beforeEach(async () => {
       groupMockElements(today.toDateString(), 1, today.toDateString());
     });
