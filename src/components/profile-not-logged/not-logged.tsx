@@ -14,7 +14,11 @@ export function NotLogged() {
         <button onClick={() => setIsInLogin(true)}>LOGIN</button>
       </div>
       <div className={styles.components}>
-        {isInLogin ? <LogIn></LogIn> : <Register></Register>}
+        {isInLogin ? (
+          <LogIn></LogIn>
+        ) : (
+          <Register setInLogin={setIsInLogin}></Register>
+        )}
       </div>
     </div>
   );

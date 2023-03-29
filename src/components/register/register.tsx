@@ -6,7 +6,11 @@ import { useUsers } from "../../hooks/use-users";
 import { User } from "../../model/user";
 import { UsersRepo } from "../../services/user-repo";
 
-export function Register() {
+type logProp = {
+  setInLogin: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export function Register({ setInLogin }: logProp) {
   const repo = useMemo(() => new UsersRepo(), []);
 
   const { userRegister } = useUsers(repo);
@@ -23,6 +27,9 @@ export function Register() {
     };
     const avatar = (formUser.elements[3] as HTMLFormElement).files?.item(0);
     userRegister(registerForm, avatar);
+
+    formUser.reset();
+    setInLogin(true);
   };
 
   return (
