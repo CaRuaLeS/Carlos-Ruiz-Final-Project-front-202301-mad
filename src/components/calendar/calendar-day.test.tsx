@@ -75,4 +75,15 @@ describe("Given the CalendarDay component", () => {
       expect(element).toHaveTextContent("30");
     });
   });
+  describe("when it sets today date", () => {
+    const today = new Date();
+    today.toDateString();
+    beforeEach(async () => {
+      groupMockElements(today.toDateString(), 1, today.toDateString());
+    });
+    test("then it should display the day, and check disable for the actual month year", async () => {
+      const element = screen.getByRole("button");
+      expect(element).toHaveTextContent("1");
+    });
+  });
 });

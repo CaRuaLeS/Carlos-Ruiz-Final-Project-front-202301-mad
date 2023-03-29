@@ -5,7 +5,7 @@ import { useReservations } from "../../hooks/use-reservations";
 import { updateActive, updateDate } from "../../reducer/calendar-slice";
 import { ReservationsRepo } from "../../services/reservation-repo";
 import { AppDispatch, RootState } from "../../store/store";
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
 
 interface CalendarDayProps {
   day: number | string;
@@ -35,7 +35,9 @@ export function CalendarDay({ day, lastOfMonth }: CalendarDayProps) {
       day < 1 ||
       day > lastOfMonth.getDate() ||
       numberMonth.includes(day.toString()) ||
-      (lastOfMonth.getMonth() === today.getMonth() && day < today.getDate())
+      (lastOfMonth.getMonth() === today.getMonth() &&
+        day < today.getDate() &&
+        today.getFullYear() === lastOfMonth.getFullYear())
     )
       return true;
     return false;
@@ -51,7 +53,7 @@ export function CalendarDay({ day, lastOfMonth }: CalendarDayProps) {
     );
   };
 
-  const handlerDay = (ev: SyntheticEvent) => {
+  const handlerDay = () => {
     dispatch(updateDate(yearMonthDate));
     dispatch(updateActive(true));
     handleClass();
