@@ -8,6 +8,8 @@ import { UsersRepo } from "../../services/user-repo";
 import { store } from "../../store/store";
 import { Register } from "./register";
 
+const mockSetState = jest.fn();
+
 jest.mock("../../hooks/use-users");
 
 const mockPasswd = "pass test";
@@ -20,7 +22,7 @@ describe("Given the register function", () => {
       });
       render(
         <Provider store={store}>
-          <Register></Register>
+          <Register setInLogin={mockSetState}></Register>
         </Provider>
       );
     });

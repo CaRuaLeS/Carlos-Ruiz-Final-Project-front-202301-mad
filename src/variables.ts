@@ -1,3 +1,5 @@
-export const URL_MAZE_USERS = "http://localhost:4500/users";
-export const URL_MAZE_ESCAPEROOMS = "http://localhost:4500/escaperooms";
-export const URL_MAZE_RESERVATIONS = "http://localhost:4500/reservations";
+export const URL_MAZE_USERS = "https://carlos-ruiz-back.onrender.com/users";
+export const URL_MAZE_ESCAPEROOMS =
+  "https://carlos-ruiz-back.onrender.com/escaperooms";
+export const URL_MAZE_RESERVATIONS =
+  "https://carlos-ruiz-back.onrender.com/reservations";
