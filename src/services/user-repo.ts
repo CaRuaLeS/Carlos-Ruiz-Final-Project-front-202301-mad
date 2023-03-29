@@ -28,16 +28,14 @@ export class UsersRepo implements RepoUser<ServerTypeUser> {
         icon: "success",
         timer: 2000,
         confirmButtonColor: "rgb(69, 69, 69)",
-        title: ` User ${urlExtraPath === "login" ? "logged" : "registered"}`,
+        title: ` User authorized`,
       });
 
     if (!resp.ok) {
       Swal.fire({
         icon: "error",
         timer: 2000,
-        title: `${
-          urlExtraPath === "login" ? "User unauthorized" : "Invalid user"
-        }`,
+        title: `Invalid user`,
       });
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
     }
