@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import {
   ReservationStructure,
   ServerTypeReservation,
@@ -27,8 +28,24 @@ export class ReservationsRepo
         "Content-type": "application/json",
       },
     });
-    if (!resp.ok)
+    if (resp.ok) {
+      Swal.fire({
+        icon: "success",
+        timer: 5000,
+        confirmButtonColor: "rgb(69, 69, 69",
+        title: `Reservation done`,
+      });
+    }
+
+    if (!resp.ok) {
+      Swal.fire({
+        icon: "error",
+        timer: 5000,
+        confirmButtonColor: "rgb(69, 69, 69",
+        title: `Log in to make a reservation`,
+      });
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
+    }
 
     const data = await resp.json();
 
@@ -44,6 +61,16 @@ export class ReservationsRepo
         Authorization: "Bearer " + token,
       },
     });
+
+    if (resp.ok) {
+      Swal.fire({
+        icon: "success",
+        timer: 5000,
+        confirmButtonColor: "rgb(69, 69, 69",
+        title: `Reservation delete`,
+      });
+    }
+
     if (!resp.ok)
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
   }

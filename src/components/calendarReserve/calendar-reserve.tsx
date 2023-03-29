@@ -30,7 +30,7 @@ export function CalendarReserve() {
           dispatch(updateActive(false));
         }}
       >
-        Reservar
+        Reserve
       </button>
     </>
   );

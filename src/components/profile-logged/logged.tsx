@@ -30,7 +30,6 @@ export function LoggedAccount() {
           ></img>
           <h2 className={styles.username}>{users.userLogged.username}</h2>
         </div>
-        <button>Edit</button>
       </section>
       <section className={styles.list}>
         <div className={styles.titlelist}>YOUR RESERVATIONS</div>

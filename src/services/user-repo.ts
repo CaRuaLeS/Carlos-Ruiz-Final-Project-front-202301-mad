@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { ServerTypeUser, UserStructure } from "../model/user";
 import { URL_MAZE_USERS } from "../variables";
 import { RepoUser } from "./user-repo-interface";
@@ -21,8 +22,23 @@ export class UsersRepo implements RepoUser<ServerTypeUser> {
         "Content-type": "application/json",
       },
     });
-    if (!resp.ok)
+
+    if (resp.ok)
+      Swal.fire({
+        icon: "success",
+        timer: 2000,
+        confirmButtonColor: "rgb(69, 69, 69)",
+        title: ` User authorized`,
+      });
+
+    if (!resp.ok) {
+      Swal.fire({
+        icon: "error",
+        timer: 2000,
+        title: `Invalid user`,
+      });
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
+    }
 
     const data = await resp.json();
 
