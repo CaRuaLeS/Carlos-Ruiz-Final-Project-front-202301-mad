@@ -22,3 +22,4 @@ Maze Manor is a web application that allows users to filter, view, and book esca
 - Make a clone of the project
 - Install dependencies: `npm i`.
 - Start the project: `npm start`.
+- To run the tests: `npm test`.
